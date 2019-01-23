@@ -1,0 +1,125 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+figure {
+  img {
+    width: 100%;
+  }
+}
+
+@font-face {
+  font-family: 'Linux Libertine';
+  src: url('../fonts/LinLibertine_R.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Linux Libertine';
+  src: url('../fonts/LinLibertine_RB.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  src: url('../fonts/LinBiolinum_R.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Linux Biolinum';
+  src: url('../fonts/LinBiolinum_RB.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+.printfont1 {
+  font-family: "Linux Libertine", sans-serif;
+}
+.printfont2 {
+  font-family: "Linux Libertine", sans-serif;
+  font-weight: bold;
+}
+.printfont3 {
+  font-family: "Linux Biolinum", sans-serif;
+}
+.printfont4 {
+  font-family: "Linux Biolinum", sans-serif;
+  font-weight: bold;
+}
+
+.todo {
+  color: red;
+  &::before {
+    content: "TODO: ";
+  }
+}
+.comment {
+  &, & * {
+    color: red !important;
+  }
+
+  font-style: italic;
+  &:before {
+    content: "[";
+  }
+  &[data-author]:before {
+    content: "[" attr(data-author) ": ";
+  }
+  &:after {
+    content: "]";
+  }
+}
+del.comment {
+  text-decoration: line-through;
+  &:before, &[data-author]:before, &:after {
+    content: "";
+  }
+  &[data-author]:after {
+    content: " (" attr(data-author) ")";
+  }
+}
+
+.spelling {
+  text-decoration: underline wavy red;
+}
+.grammar {
+  text-decoration: underline wavy darkgreen;
+}
+.rephrase {
+  text-decoration: underline wavy blue;
+}
+.reference.needed {
+  &:before {
+    content: "[?!]";
+    color: red;
+    font-weight: bold;
+  }
+}
+
+code {
+  font-family: "Ubuntu Mono", monospace;
+}
+
+li p {
+  display: inline;
+}
+
+dl {
+  margin: 1em 0;
+
+  dt {
+    font-weight: bold;
+    float: left;
+    clear: left;
+    margin-right: 1ex;
+  }
+}
+
+var {
+  font-style: italic;
+}

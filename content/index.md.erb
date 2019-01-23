@@ -1,0 +1,47 @@
+---
+title: "Republishing Open Street Map into Linked Routable Tiles"
+---
+<header markdown="1">
+# <%= @item[:title] %>
+
+{:#authors}
+- <%= person 'Ben Abelshausen', 'https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen', 'https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen' %>
+- <%= person 'Pieter Colpaert', 'https://pietercolpaert.be', 'https://pietercolpaert.be/#me' %>
+- <%= person 'Ruben Verborgh', 'https://ruben.verborgh.org/', 'https://ruben.verborgh.org/profile/#me' %>
+
+{:#affiliations}
+- {:#idlab} IDLab,
+            Department of Electronics and Information Systems,
+            Ghent University – imec
+
+<section class="context" markdown="block">
+## In reply to
+- [The Web Conference 2019 International Workshop on Location and the Web](https://dhere.de/locweb/locweb2019/){:rel="as:inReplyTo"}
+</section>
+
+</header>
+
+<!-- Hack to make our custom fonts load in print-mode -->
+<!-- https://stackoverflow.com/questions/39364259/chrome-print-preview-doesnt-load-media-only-print-font-face -->
+<span class='printfont1'> </span>
+<span class='printfont2'> </span>
+<span class='printfont3'> </span>
+<span class='printfont4'> </span>
+
+<div class="double-column">
+
+<%= section 'abstract' %>
+
+<main>
+  <!-- Add sections by specifying their file name, excluding the '.md' suffix. -->
+  <%= section 'introduction'  %>
+  <%= section 'sota'  %>
+  <%= section 'implementation'  %>
+  <%= section 'demonstrator'  %>
+  <%= section 'conclusion'  %>
+</main>
+
+<footer>
+</footer>
+
+</div>
