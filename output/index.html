@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Republishing Open Street Map’s roads as Linked Routable Tiles</title>
+  <link rel="stylesheet" media="screen" href="styles/screen.css" />
+  <link rel="stylesheet" media="print"  href="styles/print.css" />
+  <style>
+    .printonly {
+    display: none;
+    }
+    @media print {
+      .noprint {
+        display: none;
+      }
+    .printonly {
+      display: block;
+    }
+    }  
+  </style>
+  
+</head>
+<body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# as: https://www.w3.org/ns/activitystreams# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp#" typeof="schema:CreativeWork sioc:Post prov:Entity">
+  <header>
+  <h1 id="republishing-open-street-maps-roads-as-linked-routable-tiles">Republishing Open Street Map’s roads as Linked Routable Tiles</h1>
+
+  <ul id="authors">
+    <li><a href="https://pietercolpaert.be" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
+    <li><a href="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen">Ben Abelshausen</a></li>
+    <li><a href="https://ruben.verborgh.org/" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://ruben.verborgh.org/profile/#me">Ruben Verborgh</a></li>
+  </ul>
+
+  <ul id="affiliations">
+    <li id="idlab">IDLab,
+          Department of Electronics and Information Systems,
+          Ghent University – imec</li>
+  </ul>
+
+  <section class="context">
+    <h2 id="in-reply-to">In reply to</h2>
+    <ul>
+      <li><a href="https://dhere.de/locweb/locweb2019/" rel="as:inReplyTo">The Web Conference 2019 International Workshop on Location and the Web</a></li>
+    </ul>
+  </section>
+
+</header>
+
+<!-- Hack to make our custom fonts load in print-mode -->
+<!-- https://stackoverflow.com/questions/39364259/chrome-print-preview-doesnt-load-media-only-print-font-face -->
+<p><span class="printfont1"> </span>
+<span class="printfont2"> </span>
+<span class="printfont3"> </span>
+<span class="printfont4"> </span></p>
+
+<div class="double-column">
+
+<section id="abstract">
+    <h2>Abstract</h2>
+    <!-- Context      -->
+    <p>Today, providers of route planning services first integrate datasets manually before offering a Web service to developers.
+<!-- Need         -->
+Following the open world assumption, open datasets published on the Web can provide more information for calculating the weights in user specific route planning graphs.
+For example, an extra dataset of bike sharing availabilities may help the occasional cyclist.
+<!-- Task         -->
+In order for an ecosystem of route planners reusing open dataset to flourish, a strategy needs to be thought of to automate the adoption of these datasets in route planners.
+<!-- Object       -->
+Starting at the beginning, we chose to republish Open Street Map’s road network in “Routable Tiles”, similar to how vector tiles work, but in JSON-LD.
+In a demo, we show how a client-side code can automatically discover the tiles download and perform a shortest path algorithm.
+<!-- Findings     -->
+Parallels can be seen with existing solutions, yet we see four important contributions:
+(i) we launched a world-wide open dataset that is available for everyone to reuse at no cost,
+(ii) we published a Linked Data version of the Open Street Map ontology,
+(iii) the mapping scripts, demo and routing scripts are available as open source software, and
+(iv) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology.
+<!-- Conclusion and Perspectives -->
+The preliminary conclusions of this work put forward more questions than answers:
+are existing RDF serializations compact enough?
+What happens when another datasets needs to introduce new nodes that are not in the base map?
+Can other hypermedia structures be thought of?</p>
+
+  </section>
+
+
+<main>
+  <!-- Add sections by specifying their file name, excluding the '.md' suffix. -->
+  <section id="introduction">
+      <h2>Introduction</h2>
+
+      <p>When setting up a new journey planner on the Web taking into account individual user needs, developers are quickly confronted with the daunting aspects of integrating heterogeneous datasets.
+Industry players provide solutions to this mess, by providing services on top of their datasets that are centralized in one location.
+They are able to provide a solution for 80% (based on the Pareto principle) and build a business around that.
+However, we can imagine the industry route planners are not going to find a solid business model to keep integrating datasets that may benefit any individual user that is part of the other 20%.</p>
+
+      <p>Take for example use case where people want to calculate trips for:</p>
+
+      <ul>
+        <li>Companies trying to find an optimal delivery route for their bike delivery services</li>
+        <li>A foldable bike manufacturer that wants to include</li>
+      </ul>
+
+      <p>All that would be needed however is an adapted weight calculation based on these datasets.
+In this paper, we introduce “Routable Tiles”.
+We republished all the road in Open Street Map using a tiling mechanism that exploits Open Data principles.</p>
+
+    </section>
+
+  <section id="sota">
+      <h2>Related work</h2>
+
+      <h3 id="geospatial-data-on-the-web">Geospatial data on the Web</h3>
+
+      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="https://www.w3.org/TR/sdw-bp/">Spatial Data on the Web</a> <span class="references">[<a href="#ref-1">1</a>]</span> is a W3C and OGC collaboration to create a list of best practices for spatial data on the Web.
+It takes a strong position in favor of HTTP URIs to identify resources.
+The rationale is that Linked Data and the use of HTTP URIs as global identifiers, raises the interoperability.
+Raising the semantic interoperability of datasets in turn promises a higher</p>
+
+      <p>Slippy maps are maps often included in web-pages on which you can pan around.
+In order to reduce server load, the client is preconfigured with a URL template of the web-server containing image tiles.
+E.g., <code>https:/​/​{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.
+When the map is loaded, the client can calculate all URLs necessary.
+Vector tiles reuse this idea, yet instead of raster images, it publishes the raw data behind the tile.
+The client can then render the maps on the client-side.
+This gives clear benefits over raster images:
+ (i) the styling of the maps can be done by UI developers that can use CSS and scripts to style the road elements,
+ (ii) vector tiles can be smaller in size as vectors are typically much smaller than a rendered bitmap, and
+ (iii) it allows for all elements on the map to become interactive.
+Existing implementations include the Mapbox vector tiles and Open Map Tiles.
+Each have their own specificities and schemas (see [https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/][https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/] and <a href="https://openmaptiles.org/schema/">https:/​/​openmaptiles.org/schema/</a>) with a strong focus on rendering maps.</p>
+
+      <p><a href="https://github.com/valhalla/valhalla">Valhalla by Mapzen and now hosted by the Linux Foundation</a> is the first project that implements the idea of vector tiles for route planners in an open-source project.
+The technology proposes a <a href="https://github.com/valhalla/valhalla/blob/master/docs/tiles.md">tiling specification</a> for storing routing information on disk.
+Tiling the data makes sure the server can be selective about the data that needs to be loaded into memory in order to execute an individual request.
+This tiling specification in Valhalla is however not used as an exchange format – although offline routing is an upcoming feature – and interoperability with other datasets is not a focus.</p>
+
+      <h3 id="open-data-publishing">Open Data publishing</h3>
+
+      <p>Open Data can be published in various interfaces.
+In order to be able to query these interfaces, <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> was built.
+It is a Linked Data user agent that can run federated queries over several heterogeneous Web APIs, such as data dumps, SPARQL endpoints, Linked Data documents and <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs more intelligent user agents can be created.
+Preconditions for an engine like Comunica to work with your dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
+The better the data is split in fragments, the better the caching will be able to provide a faster user-perceived performance.</p>
+
+      <p>For public transport systems, instead of publishing a dump of time schedules or a full fletched route planner, <a property="schema:citation http://purl.org/spar/cito/cites" href="http://ceur-ws.org/Vol-1486/paper_28.pdf">Linked Connections</a> <span class="references">[<a href="#ref-4">4</a>]</span> proposes a publishing mechanism that gives clients access to the data in time fragments.
+It uses departure-arrival pairs from a station to another (a connection), and orders these connections by departure time.
+It then fragments this dataset in documents that can be published over HTTP.
+Links in the responses ensure a client can always find more information to take into account.</p>
+
+    </section>
+
+  <section id="implementation">
+      <h2>Implementation</h2>
+
+      <h3 id="the-specification">The Specification</h3>
+
+      <p>Routable Tiles is a JSON-LD specification and the draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>
+It has several aspects:</p>
+
+      <ol>
+        <li>It introduces a hypermedia specification reusing Hydra Collections for describing a tile server</li>
+        <li>For a server to be compliant to routable tiles, nodes, ways and restrictions needs to be modeled.</li>
+        <li>It introduces a mapping of the Open Street Map terms to an RDFS vocabulary</li>
+      </ol>
+
+      <h4 id="hypermedia">Hypermedia</h4>
+
+      <p>While in the geospatial world, standards such as WMS, WFS, … seek for strict contracts between servers and agents,
+in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
+From every document, another document can be reached by interpreting the metadata.
+Intelligent agents crawl over this data in order to find answers to queries.</p>
+
+      <figure class="" id="listing1">
+<code>
+<pre>
+{
+  "@id": "«currentPageURL»",
+  "tiles:zoom": 14,
+  "tiles:longitudeTile": 8398,
+  "tiles:latitudeTile": 5463,
+  "dcterms:isPartOf": {
+    "@id": "https://tiles.openplanner.team/planet",
+    "@type": "hydra:Collection",
+    "dcterms:license":
+            "http://opendatacommons.org/licenses/odbl/1-0/",
+    "dcterms:rights":
+            "http://www.openstreetmap.org/copyright",
+    "hydra:search": {
+      "@type": "hydra:IriTemplate",
+      "hydra:template": "https://tiles.openplanner.team/14/{x}/{y}",
+      "hydra:variableRepresentation": "hydra:BasicRepresentation",
+      "hydra:mapping": [
+        {
+          "@type": "hydra:IriTemplateMapping",
+          "hydra:variable": "x",
+          "hydra:property": "tiles:longitudeTile",
+          "hydra:required": true
+        },
+        {
+          "@type": "hydra:IriTemplateMapping",
+          "hydra:variable": "y",
+          "hydra:property": "tiles:latitudeTile",
+          "hydra:required": true
+        }
+      ]
+    }
+  },
+  "@graph" : [ ... <a href="#the-ontology">other data</a> ... ]
+}
+</pre>
+</code>
+<figcaption><span class="label">Fig. 1:</span> Example implementation of the routable tiles hypermedia: the description of the tile is given, as well as a search form in a hydra:Collection with a URL template well-known in the geospatial world. For the @context, see the full specification at https://openplanner.team/specs/2018-11-routable-tiles.html</figcaption>
+</figure>
+
+      <h3 id="the-ontology">The Ontology</h3>
+
+      <p>The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. An example:</p>
+
+      <figure class="" id="code-example-nodes-ways">
+<code>
+<pre>
+{
+  "@context" : {
+     ... <a href="#hypermedia">See section on hypermedia</a>...
+  },
+  "@graph": [
+    {
+      "@id": "#Way1",
+      "@type": "osm:Way",
+      "rdfs:label": "Chaussée de Haecht - Haachtsesteenweg",
+      "osm:maxspeed": "30",
+      "osm:highway": "osm:tertiary",
+      "osm:nodes" : [ "#Node1", "#Node2" ]
+    },
+    {
+      "@id": "#Node1",
+      "geo:long": 3.14,
+      "geo:lat": 51.2
+    },
+    {
+      "@id": "#Node2",
+      "geo:long": 3.12,
+      "geo:lat": 51.32
+      "osm:barrier": "osm:bollard"
+      "osm:foot": "osm:yes"
+      "osm:bicycle": "osm:yes"
+    },
+    {
+      "@id": "#Node3",
+      "geo:long": 3.22,
+      "geo:lat": 51.22
+    },
+    {
+      "@id": "#Way2",
+      "@type": "osm:Way",
+      "rdfs:label": "Rue Cornet de Grez - Cornet de Grezstraat",
+      "osm:highway": "osm:residential",
+      "osm:oneway": "yes",
+      "osm:oneway-bicycle": "no",
+      "osm:highway": "osm:tertiary",
+      "osm:nodes" : [ "#Node1", "#Node3" ]
+    },
+    {
+      "@id": "#TurnRestriction1",
+      "@type": "osm:Relation",
+      "osm:restriction":"osm:no_right_turn",
+      "osm:from": "#Way1",
+      "osm:to": "#Way2",
+      "osm:via": "#Node1"
+    }
+  ]
+}
+  </pre>
+</code>
+<figcaption><span class="label">Fig. 2:</span> An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
+</figure>
+
+      <p>We define 3 main classes: osm:Way, osm:Relation and osm:Node.</p>
+
+      <p>osm:from, osm:to and osm:via are predicates to indicate how a Relation maps Ways and Nodes.</p>
+
+      <p>osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
+
+      <ol>
+        <li>osm:no_left_turn</li>
+        <li>osm:no_right_turn</li>
+        <li>osm:no_straight_on</li>
+        <li>osm:no_u_turn</li>
+        <li>osm:only_right_turn</li>
+        <li>osm:only_left_turn</li>
+        <li>osm:only_straight_on</li>
+        <li>osm:no_entry</li>
+        <li>osm:no_exit</li>
+      </ol>
+
+      <p>The property osm:nodes is used to link to an rdf:List of osm:Node items.
+In one page, multiple lists can be described.
+If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.</p>
+
+      <h3 id="the-server">The Server</h3>
+
+      <p>The mapping scripts and server interface can be found at <a href="https://github.com/openplannerteam/routeable-tiles">https:/​/​github.com/openplannerteam/routeable-tiles</a>.
+Every tile in Open Street Map on zoom level 14 is on the fly made available as JSON-LD.
+Special attention was given to the HTTP server to include a server-side cache and to compress the HTTP response with gzip.
+Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
+Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.</p>
+
+      <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
+We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
+For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/​www.openstreetmap.org/node/366934331</a> and <a href="https://www.openstreetmap.org/way/242536619">https:/​/​www.openstreetmap.org/way/242536619</a>.</p>
+
+    </section>
+
+  <section id="demonstrator">
+      <h2>Demonstrator</h2>
+
+      <p>A live demonstrator can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
+
+      <figure id="listing2">
+<img src="img/routabletiles.png" class="printonly" />
+<iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/" style="width: 100%; height: 50vh;">
+</iframe>
+<figcaption><span class="label">Fig. 3:</span> A demonstrator of what you can do with Routable Tiles. You can pan around, select another city, and calculate a shortest path. Both rendering the map and the route planning happens on the client-side while loading the tiles dynamically.</figcaption>
+</figure>
+
+      <p>The data is used for rendering the map as well as routing.
+As every tile got a …</p>
+
+    </section>
+
+  <section id="conclusion">
+      <h2>Conclusion and discussion</h2>
+
+      <h3 id="what-is-the-benefit-of-publishing-geospatial-data-as-linked-open-data">What is the benefit of publishing geospatial data as Linked Open Data?</h3>
+
+      <p>It is particularly difficult to</p>
+
+      <ul>
+        <li>Federation</li>
+        <li>lower server costs thanks to caching</li>
+        <li>Specific end-user needs can be done on the client-side
+  *</li>
+      </ul>
+
+      <p>Still optimizations can be done such as applying transfer patterns on public transport data,</p>
+
+      <p>With the increase in CPU power and bandwidth of end-user devices, we can imagine that end-user devices become more intelligent and perform user-specific algorithms on the client rather than having to rely on server functionality.</p>
+
+    </section>
+
+</main>
+
+<footer>
+<section id="references">
+<h2>References</h2>
+<dl class="references">
+  <dt id="ref-1">[1]</dt>
+  <dd resource="https://www.w3.org/TR/sdw-bp/" typeof="schema:CreativeWork">Tandy, J., Barnaghi, P., van den Brink, L.: Spatial Data on the Web Best Practices. W3C, <a href="https://www.w3.org/TR/sdw-bp/">https:/​/​www.w3.org/TR/sdw-bp/</a> (2017).</dd>
+  <dt id="ref-2">[2]</dt>
+  <dd resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Vrandečić, D., Bontcheva, K., Suárez-Figueroa, M.C., Presutti, V., Celino, I., Sabou, M., Kaffee, L.-A., and Simperl, E. (eds.) Proceedings of the 17th International Semantic Web Conference. pp. 239–255. Springer (2018).</dd>
+  <dt id="ref-3">[3]</dt>
+  <dd resource="https://dx.doi.org/10.1016/j.websem.2016.03.003" typeof="schema:Article">Verborgh, R., Vander Sande, M., Hartig, O., Van Herwegen, J., De Vocht, L., De Meester, B., Haesendonck, G., Colpaert, P.: Triple Pattern Fragments: a Low-cost Knowledge Graph Interface for the Web. Journal of Web Semantics. 37–38, (2016).</dd>
+  <dt id="ref-4">[4]</dt>
+  <dd resource="http://ceur-ws.org/Vol-1486/paper_28.pdf" typeof="schema:Article">Colpaert, P., Llaves, A., Verborgh, R., Corcho, O., Mannens, E., Van de Walle, R.: Intermodal public transit routing using Linked Connections. In: Proceedings of the 14th International Semantic Web Conference: Posters and Demos (2015).</dd>
+</dl>
+</section>
+</footer>
+
+</div>
+
+
+
+</body>
+</html>
