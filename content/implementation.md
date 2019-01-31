@@ -150,6 +150,8 @@ Special attention was given to the HTTP server to include a server-side cache an
 Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
 Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.
 
+Due to [a recent change in the WhatWG fetch specification](https://github.com/whatwg/fetch/issues/862), there is also a need for supporting the OPTIONS method, that specifically allows 
+
 For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
 For example: [https://www.openstreetmap.org/node/366934331](https://www.openstreetmap.org/node/366934331) and [https://www.openstreetmap.org/way/242536619](https://www.openstreetmap.org/way/242536619).

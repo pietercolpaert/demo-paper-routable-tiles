@@ -304,6 +304,8 @@ Special attention was given to the HTTP server to include a server-side cache an
 Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
 Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.</p>
 
+      <p>Due to <a href="https://github.com/whatwg/fetch/issues/862">a recent change in the WhatWG fetch specification</a>, there is also a need for supporting the OPTIONS method, that specifically allows</p>
+
       <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
 For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/​www.openstreetmap.org/node/366934331</a> and <a href="https://www.openstreetmap.org/way/242536619">https:/​/​www.openstreetmap.org/way/242536619</a>.</p>
@@ -313,17 +315,21 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/�
   <section id="demonstrator">
       <h2>Demonstrator</h2>
 
-      <p>A live demonstrator can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
+      <p>The server has been set-up for the entire world at <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/</a>.</p>
+
+      <p>A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
 
       <figure id="listing2">
 <img src="img/routabletiles.png" class="printonly" />
-<iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/" style="width: 100%; height: 50vh;">
+<iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/#latitude=37.80842772926481&amp;longitude=-122.46871948242189" style="width: 100%; height: 50vh;">
 </iframe>
 <figcaption><span class="label">Fig. 3:</span> A demonstrator of what you can do with Routable Tiles. You can pan around, select another city, and calculate a shortest path. Both rendering the map and the route planning happens on the client-side while loading the tiles dynamically.</figcaption>
 </figure>
 
       <p>The data is used for rendering the map as well as routing.
-As every tile got a …</p>
+As every tile contains global identifiers for each Way, Node and Relation, these identifiers can be reused by third parties.
+Furthermore, the properties that are added on top of these resources can share properties, and automated alignment through reasoning can enrich the existing data.
+We discuss the open challenges in the last chapter.</p>
 
     </section>
 
