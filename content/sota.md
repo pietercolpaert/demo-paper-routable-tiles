@@ -19,7 +19,7 @@ This gives clear benefits over raster images:
  (ii) vector tiles can be smaller in size as vectors are typically much smaller than a rendered bitmap, and
  (iii) it allows for all elements on the map to become interactive.
 Existing implementations include the Mapbox vector tiles and Open Map Tiles.
-Each have their own specificities and schemas (see [https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/][https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/] and [https://openmaptiles.org/schema/](https://openmaptiles.org/schema/)) with a strong focus on rendering maps.
+Each have their own specificities and schemas (see [https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/](https://docs.mapbox.com/vector-tiles/mapbox-streets-v8/) and [https://openmaptiles.org/schema/](https://openmaptiles.org/schema/)) with a strong focus on rendering maps.
 
 [Valhalla by Mapzen and now hosted by the Linux Foundation](https://github.com/valhalla/valhalla) is the first project that implements the idea of vector tiles for route planners in an open-source project.
 The technology proposes a [tiling specification](https://github.com/valhalla/valhalla/blob/master/docs/tiles.md) for storing routing information on disk.
