@@ -9,7 +9,7 @@ guard :process, name: 'server', command: 'bundle exec serve' do
 end
 
 guard :livereload do
-  watch(%r{^output/}) { |m| m[0].sub(%r{^output/}, '') }
+  watch(%r{^docs/}) { |m| m[0].sub(%r{^docs/}, '') }
 end
 
 notification :notifu, :nosound => true
