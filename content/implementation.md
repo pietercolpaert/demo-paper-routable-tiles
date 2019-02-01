@@ -68,7 +68,7 @@ The ontology is kept as a direct mapping from OSM terms to a Linked Data ontolog
 <pre>
 {
   "@context" : {
-     ... <a href="#hypermedia">See section on hypermedia</a>...
+     ... <a href="#hypermedia">See section on hypermedia</a> ...
   },
   "@graph": [
     {
@@ -150,7 +150,7 @@ Special attention was given to the HTTP server to include a server-side cache an
 Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
 Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.
 
-Due to [a recent change in the WhatWG fetch specification](https://github.com/whatwg/fetch/issues/862), there is also a need for supporting the OPTIONS method, that specifically allows 
+Due to [a recent change in the WhatWG fetch specification](https://github.com/whatwg/fetch/issues/862), there is also a need for supporting the OPTIONS method, that specifically allows all headers in its response.
 
 For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.

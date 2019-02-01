@@ -18,7 +18,7 @@ Parallels can be seen with existing solutions, yet we see four important contrib
 <!-- Conclusion and Perspectives -->
 The preliminary conclusions of this work put forward more questions than answers:
 are existing RDF serializations compact enough?
-What happens when another datasets needs to introduce new nodes that are not in the base map?
+What happens when another dataset needs to introduce new nodes that are not in the base map?
 Can other hypermedia structures be thought of?
 
 
