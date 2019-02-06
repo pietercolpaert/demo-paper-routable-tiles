@@ -111,9 +111,23 @@ The ontology is kept as a direct mapping from OSM terms to a Linked Data ontolog
       "@id": "#TurnRestriction1",
       "@type": "osm:Relation",
       "osm:restriction":"osm:no_right_turn",
-      "osm:from": "#Way1",
-      "osm:to": "#Way2",
-      "osm:via": "#Node1"
+      "osm:members" : [
+        {
+          "@id": "#Way1",
+          "@type": "osm:Way",
+          "osm:role": "osm:from"
+        },
+        {
+          "@id": "#Way2",
+          "@type": "osm:Way",
+          "osm:role": "osm:to"
+        },
+        {
+          "@id": "#Node1",
+          "@type": "osm:Node",
+          "osm:role": "osm:via"
+        }
+      ]
     }
   ]
 }
@@ -122,9 +136,9 @@ The ontology is kept as a direct mapping from OSM terms to a Linked Data ontolog
 <figcaption>An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
 </figure>
 
-We define 3 main classes: osm:Way, osm:Relation and osm:Node.
-  
-osm:from, osm:to and osm:via are predicates to indicate how a Relation maps Ways and Nodes.
+We define 3 main classes: osm:Way, osm:Relation, osm:Node.
+
+The osm:members describe the members of the relation and the osm:role their function in the relation.
 
 osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:
 
@@ -141,6 +155,7 @@ osm:restriction is used to model turn restrictions. There are <a href="https://w
 The property osm:nodes is used to link to an rdf:List of osm:Node items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
+The property osm:members is used to link to an rdf:List of osm:Member items.
 
 ### The Server
 
