@@ -139,16 +139,18 @@ as we discuss in the conclusion and discussion section.</p>
 
       <h3 id="geospatial-data-on-the-web">Geospatial data on the Web</h3>
 
-      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="https://www.w3.org/TR/sdw-bp/">Spatial Data on the Web</a> <span class="references">[<a href="#ref-1">1</a>]</span> is a W3C and OGC collaboration to create a list of best practices for spatial data on the Web.
+      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="https://www.w3.org/TR/sdw-bp/">Spatial Data on the Web</a> <span class="references">[<a href="#ref-1">1</a>]</span> is a W3C and OGC collaboration 
+to create a list of best practices for spatial data on the Web.
 It takes a strong position in favor of HTTP URIs to identify resources.
-The rationale is that Linked Data and the use of HTTP URIs as global identifiers, raises the interoperability.
-Raising the semantic interoperability of datasets in turn promises a higher</p>
+The rationale is that Linked Data principles such as the use of HTTP URIs as global identifiers, 
+raises the interoperability of geo-spatial datasets 
+by providing a common set of semantics that can be reused by data publishers.</p>
 
       <p>Slippy maps are maps often included in web-pages on which you can pan around.
 In order to reduce server load, the client is preconfigured with a URL template of the web-server containing image tiles.
 E.g., <code>https:/​/​{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.
 When the map is loaded, the client can calculate all URLs necessary.
-Vector tiles reuse this idea, yet instead of raster images, it publishes the raw data behind the tile.
+Vector tiles reuse this idea to, instead of raster images, publish the raw data behind the tiles.
 The client can then render the maps on the client-side.
 This gives clear benefits over raster images:
  (i) the styling of the maps can be done by UI developers that can use CSS and scripts to style the road elements,
@@ -167,8 +169,8 @@ This tiling specification in Valhalla is however not used as an exchange format 
       <p>Open Data can be published in various interfaces.
 In order to be able to query these interfaces, <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> was built.
 It is a Linked Data user agent that can run federated queries over several heterogeneous Web APIs, such as data dumps, SPARQL endpoints, Linked Data documents and <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
-This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs more intelligent user agents can be created.
-Preconditions for an engine like Comunica to work with your dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
+This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs, more intelligent user agents can be created.
+Preconditions for an engine like Comunica to work with a dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
 The better the data is split in fragments, the better the caching will be able to provide a faster user-perceived performance.</p>
 
       <p>For public transport systems, instead of publishing a dump of time schedules or a full fletched route planner, <a property="schema:citation http://purl.org/spar/cito/cites" href="http://ceur-ws.org/Vol-1486/paper_28.pdf">Linked Connections</a> <span class="references">[<a href="#ref-4">4</a>]</span> proposes a publishing mechanism that gives clients access to the data in time fragments.
@@ -183,7 +185,7 @@ Links in the responses ensure a client can always find more information to take 
 
       <h3 id="the-specification">The Specification</h3>
 
-      <p>Routable Tiles is a JSON-LD specification and the draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>
+      <p>Routable Tiles is a JSON-LD specification and the draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>.
 It has several aspects:</p>
 
       <ol>
@@ -194,8 +196,8 @@ It has several aspects:</p>
 
       <h4 id="hypermedia">Hypermedia</h4>
 
-      <p>While in the geospatial world, standards such as WMS, WFS, … seek for strict contracts between servers and agents,
-in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
+      <p>In the geospatial world, standards such as WMS and WFS, seek for strict contracts between servers and agents.
+While in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
 From every document, another document can be reached by interpreting the metadata.
 Intelligent agents crawl over this data in order to find answers to queries.</p>
 
@@ -243,7 +245,11 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
 
       <h3 id="the-ontology">The Ontology</h3>
 
-      <p>The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. An example:</p>
+      <p>The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. 
+OSM terms are well-known among the developer community, 
+which increases the adoption and facilitates the understanding of the ontology. 
+Moreover, having an OSM ontology will allow other data providers 
+to reuse the OSM terminology and thus link their datasets to OSM. An example:</p>
 
       <figure class="" id="code-example-nodes-ways">
 <code>
@@ -318,11 +324,9 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
 <figcaption><span class="label">Fig. 2:</span> An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
 </figure>
 
-      <p>We define 3 main classes: osm:Way, osm:Relation, osm:Node.</p>
-
-      <p>The osm:members describe the members of the relation and the osm:role their function in the relation.</p>
-
-      <p>osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
+      <p>We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
+The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
+<code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
 
       <ol>
         <li>osm:no_left_turn</li>
@@ -336,10 +340,10 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
         <li>osm:no_exit</li>
       </ol>
 
-      <p>The property osm:nodes is used to link to an rdf:List of osm:Node items.
+      <p>The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
-The property osm:members is used to link to an rdf:List of osm:Member items.</p>
+The property <code>osm:members</code> is used to link to an <code>rdf:List</code> of <code>osm:Member</code> items.</p>
 
       <h3 id="the-server">The Server</h3>
 

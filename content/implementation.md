@@ -3,7 +3,7 @@
 
 ### The Specification
 
-Routable Tiles is a JSON-LD specification and the draft can be found at [https://openplanner.team/specs/2018-11-routable-tiles.html](https://openplanner.team/specs/2018-11-routable-tiles.html)
+Routable Tiles is a JSON-LD specification and the draft can be found at [https://openplanner.team/specs/2018-11-routable-tiles.html](https://openplanner.team/specs/2018-11-routable-tiles.html).
 It has several aspects:
 
  1. It introduces a hypermedia specification reusing Hydra Collections for describing a tile server
@@ -12,8 +12,8 @@ It has several aspects:
 
 #### Hypermedia
 
-While in the geospatial world, standards such as WMS, WFS, ... seek for strict contracts between servers and agents,
-in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
+In the geospatial world, standards such as WMS and WFS, seek for strict contracts between servers and agents.
+While in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
 From every document, another document can be reached by interpreting the metadata.
 Intelligent agents crawl over this data in order to find answers to queries.
 
@@ -61,7 +61,11 @@ Intelligent agents crawl over this data in order to find answers to queries.
 
 ### The Ontology
 
-The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. An example:
+The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. 
+OSM terms are well-known among the developer community, 
+which increases the adoption and facilitates the understanding of the ontology. 
+Moreover, having an OSM ontology will allow other data providers 
+to reuse the OSM terminology and thus link their datasets to OSM. An example:
 
 <figure class="" id="code-example-nodes-ways">
 <code>
@@ -136,11 +140,9 @@ The ontology is kept as a direct mapping from OSM terms to a Linked Data ontolog
 <figcaption>An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
 </figure>
 
-We define 3 main classes: osm:Way, osm:Relation, osm:Node.
-
-The osm:members describe the members of the relation and the osm:role their function in the relation.
-
-osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:
+We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
+The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
+<code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:
 
  1. osm:no\_left_turn
  2. osm:no\_right_turn
@@ -152,10 +154,10 @@ osm:restriction is used to model turn restrictions. There are <a href="https://w
  8. osm:no\_entry
  9. osm:no\_exit
 
-The property osm:nodes is used to link to an rdf:List of osm:Node items.
+The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
-The property osm:members is used to link to an rdf:List of osm:Member items.
+The property <code>osm:members</code> is used to link to an <code>rdf:List</code> of <code>osm:Member</code> items.
 
 ### The Server
 
