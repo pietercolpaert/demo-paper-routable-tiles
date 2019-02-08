@@ -58,17 +58,31 @@
 <section id="abstract">
     <h2>Abstract</h2>
     <!-- Context      -->
-    <p>Today, route planning providers manually integrate different geo-spatial and temporal datasets before offering a Web service to developers, thus creating a closed world view. In contrast, open datasets on the Web follow the open world assumption and combining them at runtime can provide more information for user-specific route planning needs. For example, an extra dataset of bike sharing availabilities may provide more relevant information to the occasional cyclist.
+    <p>Today, route planning providers manually integrate different geo-spatial datasets 
+before offering a Web service to developers, thus creating a closed world view. 
+In contrast, combining open datasets at runtime 
+can provide more information for user-specific route planning needs. 
+For example, an extra dataset of bike sharing availabilities 
+may provide more relevant information to the occasional cyclist.
 <!-- Need         -->
-In order for an ecosystem of route planners reusing open datasets to flourish, a strategy for automating the adoption of these datasets in route planners is needed. This rises new challenges such us (i) how open datasets should be published on the Web to raise interoperability, and (ii) how can route planners discover and integrate relevant data for a certain query on the fly.
-<!-- Task         -->
-To facilitate its integration into open route planners, we republished Open Street Map’s road network as “Routable Tiles” in a similar to how vector tiles work, but as Linked Data.
+A strategy for automating the adoption of open geo-spatial datasets is needed 
+to allow an ecosystem of route planners able to answer more specific and complex queries. 
+This rises new challenges such us 
+(i) how open geo-spatial datasets should be published on the Web to raise interoperability, 
+and (ii) how route planners can discover and integrate relevant data for a certain query on the fly.
+<!-- Task         --> 
+We republished Open Street Map’s road network as “Routable Tiles”
+to facilitate its integration into open route planners.
+To achieve this, we use a Linked Data strategy and follow an approach similar to vector tiles.
 <!-- Object       -->
 In a demo, we show how client-side code can automatically discover tiles and perform a shortest path algorithm.
 <!-- Findings     -->
-We provide four contributions: (i) we launched an open dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) the mapping scripts, demo and routing scripts are available as open source software, and (iv) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology.
+We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
 <!-- Conclusion and Perspectives -->
-The preliminary conclusions of this work put forward more questions than answers: are existing RDF serializations compact enough? What happens when another dataset needs to introduce new nodes that are not in the base map? Can other hypermedia structures be thought of?</p>
+The preliminary conclusions of this work put forward more questions than answers: 
+are existing RDF serializations compact enough for an acceptable user experience? 
+What happens when another dataset needs to introduce new nodes that are not in the base map? 
+Can other hypermedia structures be thought of?</p>
   </section>
 
 
@@ -262,9 +276,23 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
       "@id": "#TurnRestriction1",
       "@type": "osm:Relation",
       "osm:restriction":"osm:no_right_turn",
-      "osm:from": "#Way1",
-      "osm:to": "#Way2",
-      "osm:via": "#Node1"
+      "osm:members" : [
+        {
+          "@id": "#Way1",
+          "@type": "osm:Way",
+          "osm:role": "osm:from"
+        },
+        {
+          "@id": "#Way2",
+          "@type": "osm:Way",
+          "osm:role": "osm:to"
+        },
+        {
+          "@id": "#Node1",
+          "@type": "osm:Node",
+          "osm:role": "osm:via"
+        }
+      ]
     }
   ]
 }
@@ -273,9 +301,9 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
 <figcaption><span class="label">Fig. 2:</span> An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
 </figure>
 
-      <p>We define 3 main classes: osm:Way, osm:Relation and osm:Node.</p>
+      <p>We define 3 main classes: osm:Way, osm:Relation, osm:Node.</p>
 
-      <p>osm:from, osm:to and osm:via are predicates to indicate how a Relation maps Ways and Nodes.</p>
+      <p>The osm:members describe the members of the relation and the osm:role their function in the relation.</p>
 
       <p>osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
 
@@ -293,7 +321,8 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
 
       <p>The property osm:nodes is used to link to an rdf:List of osm:Node items.
 In one page, multiple lists can be described.
-If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.</p>
+If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
+The property osm:members is used to link to an rdf:List of osm:Member items.</p>
 
       <h3 id="the-server">The Server</h3>
 
