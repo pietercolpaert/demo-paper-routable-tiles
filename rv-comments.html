@@ -27,7 +27,7 @@
   <ul id="authors">
     <li><a href="https://pietercolpaert.be" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
     <li><a href="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen">Ben Abelshausen</a></li>
-    <li><a href="#julian" typeof="http://xmlns.com/foaf/0.1/Person" resource="#julian">Julián Andrés Rojas Meléndez</a></li>
+    <li><a href="#julian" typeof="http://xmlns.com/foaf/0.1/Person" resource="#julian">Julián Rojas</a></li>
     <li><a href="https://ruben.verborgh.org/" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://ruben.verborgh.org/profile/#me">Ruben Verborgh</a></li>
   </ul>
 
@@ -58,31 +58,30 @@
 <section id="abstract">
     <h2>Abstract</h2>
     <!-- Context      -->
-    <p>Today, route planning providers manually integrate different geo-spatial datasets 
-before offering a Web service to developers, thus creating a closed world view. 
-In contrast, combining open datasets at runtime 
-can provide more information for user-specific route planning needs. 
-For example, an extra dataset of bike sharing availabilities 
-may provide more relevant information to the occasional cyclist.
+    <p>Today, route planning providers manually integrate different geo-spatial and -temporal datasets before offering a Web service to developers, creating a closed world view.
 <!-- Need         -->
-A strategy for automating the adoption of open geo-spatial datasets is needed 
-to allow an ecosystem of route planners able to answer more specific and complex queries. 
-This rises new challenges such us 
-(i) how open geo-spatial datasets should be published on the Web to raise interoperability, 
-and (ii) how route planners can discover and integrate relevant data for a certain query on the fly.
-<!-- Task         --> 
-We republished Open Street Map’s road network as “Routable Tiles”
-to facilitate its integration into open route planners.
-To achieve this, we use a Linked Data strategy and follow an approach similar to vector tiles.
+In contrast, open datasets on the Web follow the open world assumption.
+Combining such datasets at runtime can provide more information for user-specific route planning needs.
+For example, an extra dataset of bike sharing availabilities may help the occasional cyclist.
+In order for an ecosystem of route planners reusing open datasets to flourish, we need a strategy for automating the adoption of these datasets in route planners.
+<span class="comment" author="RV">(How) does the solution address the need? Is the need specific enough?</span>
+<!-- Task         -->
+To facilitate its integration into open route planners,
 <!-- Object       -->
+we republished Open Street Map’s road network as “Routable Tiles”, similar to how vector tiles work, but as Linked Data.
 In a demo, we show how client-side code can automatically discover tiles and perform a shortest path algorithm.
 <!-- Findings     -->
-We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
+We provide four contributions:
+(i) we launched an open dataset that is available for everyone to reuse at no cost,
+(ii) we published a Linked Data version of the Open Street Map ontology,
+(iii) the mapping scripts, demo and routing scripts are available as open source software, and
+(iv) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology.
 <!-- Conclusion and Perspectives -->
-The preliminary conclusions of this work put forward more questions than answers: 
-are existing RDF serializations compact enough for an acceptable user experience? 
-What happens when another dataset needs to introduce new nodes that are not in the base map? 
+The preliminary conclusions of this work put forward more questions than answers:
+are existing RDF serializations compact enough?
+What happens when another dataset needs to introduce new nodes that are not in the base map?
 Can other hypermedia structures be thought of?</p>
+
   </section>
 
 
@@ -93,45 +92,29 @@ Can other hypermedia structures be thought of?</p>
 
       <h2 id="introduction">Introduction</h2>
 
-      <p>When setting up a Web-based journey planner that takes into account individual user needs, 
-developers are confronted with the daunting prospect of integrating heterogeneous datasets. 
-Industry players provide an alternative solution to this tangle, 
-by providing services on top of their datasets that are centralized in one location. 
-They are able to provide a solution for the Pareto principle’s 80% 
-and build a business around that. 
-When trying to cater to the remaining 20%, 
-industrial route planners are quickly confronted 
-with diminishing returns of integrating more datasets.</p>
+      <p>When setting up a Web-based journey planner that takes into account individual user needs, developers are confronted with the daunting prospect of integrating heterogeneous datasets.
+Industry players provide an alternative solution to this tangle, by providing services on top of their datasets that are centralized in one location.
+They are able to provide a solution for the Pareto principle's 80% and build a business around that.
+When trying to cater to the remaining 20%, industrial route planners are quickly confronted with diminishing returns of integrating more datasets.</p>
 
-      <p>Take for example use cases of people owning a foldable bike 
-that can take their bike on public transport, 
-companies trying to find an optimal delivery route for their delivery service 
-where some vehicles cannot pass through low emission zones, 
-routes based on the real-time state of traffic control systems 
-and probability to hit a green light 
-or people with special constraints or disabilities.</p>
+      <p>Take for example use cases of
+people owning a foldable bike that can take their bike on public transport,
+companies trying to find an optimal delivery route for their delivery service where some vehicles cannot pass through low emission zones,
+routes based on the probability and real-time state of traffic control systems to hit a red light,
+people with special constraints or disabilities.</p>
 
-      <p>For each of these use cases, 
-extra datasets are needed to calculate these end-user specific routing graphs. 
-Such datasets are published by different organizations 
-that often publish them openly, thanks to strategic goals or legal mandates. 
-Every route planner will somehow need to compile their own sources 
-over which they can execute their own route planning algorithm.</p>
+      <p>For each of these use cases, extra datasets are needed to calculate these end-user specific routing graph.
+Such datasets are published by different organizations that often publish their data openly, thanks to legal constraints or strategic goals.
+Every route planner will somehow need to compile their own sources which they want to take into account.</p>
 
-      <p>In this paper, we aim to automate data adoption in route planners 
-and as a first step we decided to introduce “Routable Tiles”. 
-Routable Tiles is a specification in which we republished all the roads in Open Street Map 
-using a tiling mechanism that exploits Open Data principles. 
-In the next section we will see that the ideas behind Routable Tiles itself is not novel, 
-yet to the best of our knwoledge, 
-publishing routable tiles for clients to consume has not been done before.</p>
+      <p>In this paper, we aim to automate data adoption in route planners, and as a first step decided to introduce “Routable Tiles”.
+Routable Tiles is a specification in which we republished all the roads in Open Street Map using a tiling mechanism that exploits Open Data principles.
+In the next section we will see that the ideas behind Routable Tiles itself is not novel, yet somehow publishing routable tiles for clients to consume has not been done before.
+<span class="comment" author="RV">"Somehow" is not the greatest argument of utility.</span>
+After introducing the ontology, specification and server software, we demonstrate what now becomes possible in an in-browser demo.
+The browser itself can perform a routing algorithm on the client-side, and every step in the routing algorithm can involve other weights and datasets as it pleases.
+This first prototype exploiting Open Data principles probably introduces more questions than answers.</p>
 
-      <p>After introducing the ontology, specification and server software, 
-we demonstrate what now becomes possible in an in-browser demo. 
-The browser itself can perform a routing algorithm on the client-side, 
-and every step in the routing algorithm can involve other weights and datasets as it pleases. 
-This first prototype exploiting Open Data principles probably introduces more questions than answers 
-as we discuss in the conclusion and discussion section.</p>
     </section>
 
   <section id="sota">
@@ -139,18 +122,16 @@ as we discuss in the conclusion and discussion section.</p>
 
       <h3 id="geospatial-data-on-the-web">Geospatial data on the Web</h3>
 
-      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="https://www.w3.org/TR/sdw-bp/">Spatial Data on the Web</a> <span class="references">[<a href="#ref-1">1</a>]</span> is a W3C and OGC collaboration 
-to create a list of best practices for spatial data on the Web.
+      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="https://www.w3.org/TR/sdw-bp/">Spatial Data on the Web</a> <span class="references">[<a href="#ref-1">1</a>]</span> is a W3C and OGC collaboration to create a list of best practices for spatial data on the Web.
 It takes a strong position in favor of HTTP URIs to identify resources.
-The rationale is that Linked Data principles such as the use of HTTP URIs as global identifiers, 
-raises the interoperability of geo-spatial datasets 
-by providing a common set of semantics that can be reused by data publishers.</p>
+The rationale is that Linked Data and the use of HTTP URIs as global identifiers, raises the interoperability.
+Raising the semantic interoperability of datasets in turn promises a higher</p>
 
       <p>Slippy maps are maps often included in web-pages on which you can pan around.
 In order to reduce server load, the client is preconfigured with a URL template of the web-server containing image tiles.
 E.g., <code>https:/​/​{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.
 When the map is loaded, the client can calculate all URLs necessary.
-Vector tiles reuse this idea to, instead of raster images, publish the raw data behind the tiles.
+Vector tiles reuse this idea, yet instead of raster images, it publishes the raw data behind the tile.
 The client can then render the maps on the client-side.
 This gives clear benefits over raster images:
  (i) the styling of the maps can be done by UI developers that can use CSS and scripts to style the road elements,
@@ -169,8 +150,8 @@ This tiling specification in Valhalla is however not used as an exchange format 
       <p>Open Data can be published in various interfaces.
 In order to be able to query these interfaces, <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> was built.
 It is a Linked Data user agent that can run federated queries over several heterogeneous Web APIs, such as data dumps, SPARQL endpoints, Linked Data documents and <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
-This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs, more intelligent user agents can be created.
-Preconditions for an engine like Comunica to work with a dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
+This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs more intelligent user agents can be created.
+Preconditions for an engine like Comunica to work with your dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
 The better the data is split in fragments, the better the caching will be able to provide a faster user-perceived performance.</p>
 
       <p>For public transport systems, instead of publishing a dump of time schedules or a full fletched route planner, <a property="schema:citation http://purl.org/spar/cito/cites" href="http://ceur-ws.org/Vol-1486/paper_28.pdf">Linked Connections</a> <span class="references">[<a href="#ref-4">4</a>]</span> proposes a publishing mechanism that gives clients access to the data in time fragments.
@@ -185,7 +166,7 @@ Links in the responses ensure a client can always find more information to take 
 
       <h3 id="the-specification">The Specification</h3>
 
-      <p>Routable Tiles is a JSON-LD specification and the draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>.
+      <p>Routable Tiles is a JSON-LD specification and the draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>
 It has several aspects:</p>
 
       <ol>
@@ -196,9 +177,9 @@ It has several aspects:</p>
 
       <h4 id="hypermedia">Hypermedia</h4>
 
-      <p>In the geospatial world, standards such as WMS and WFS, seek for strict contracts between servers and agents.
-While in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
-From every document, another document can be reached by interpreting the metadata.
+      <p>While in the geospatial world, standards such as WMS, WFS, … seek for strict contracts between servers and agents,
+in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
+From every document, other documents can be reached by interpreting these controls.
 Intelligent agents crawl over this data in order to find answers to queries.</p>
 
       <figure class="" id="listing1">
@@ -240,16 +221,13 @@ Intelligent agents crawl over this data in order to find answers to queries.</p>
 }
 </pre>
 </code>
-<figcaption><span class="label">Fig. 1:</span> Example implementation of the routable tiles hypermedia: the description of the tile is given, as well as a search form in a hydra:Collection with a URL template well-known in the geospatial world. For the @context, see the full specification at https://openplanner.team/specs/2018-11-routable-tiles.html</figcaption>
+<figcaption><span class="label">Fig. 1:</span> Example implementation of the routable tiles hypermedia: the description of the tile is given, as well as a search form in a hydra:Collection with a URL template well-known in the geospatial world. For the <code>@context</code>, see the full specification at https://openplanner.team/specs/2018-11-routable-tiles.html</figcaption>
 </figure>
 
       <h3 id="the-ontology">The Ontology</h3>
 
-      <p>The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. 
-OSM terms are well-known among the developer community, 
-which increases the adoption and facilitates the understanding of the ontology. 
-Moreover, having an OSM ontology will allow other data providers 
-to reuse the OSM terminology and thus link their datasets to OSM. An example:</p>
+      <p>The ontology is maintained as a direct mapping from OSM terms to a Linked Data ontology. An example:</p>
+<span class="comment" author="RV">good for us, but why?</span>
 
       <figure class="" id="code-example-nodes-ways">
 <code>
@@ -299,23 +277,9 @@ to reuse the OSM terminology and thus link their datasets to OSM. An example:</p
       "@id": "#TurnRestriction1",
       "@type": "osm:Relation",
       "osm:restriction":"osm:no_right_turn",
-      "osm:members" : [
-        {
-          "@id": "#Way1",
-          "@type": "osm:Way",
-          "osm:role": "osm:from"
-        },
-        {
-          "@id": "#Way2",
-          "@type": "osm:Way",
-          "osm:role": "osm:to"
-        },
-        {
-          "@id": "#Node1",
-          "@type": "osm:Node",
-          "osm:role": "osm:via"
-        }
-      ]
+      "osm:from": "#Way1",
+      "osm:to": "#Way2",
+      "osm:via": "#Node1"
     }
   ]
 }
@@ -324,26 +288,27 @@ to reuse the OSM terminology and thus link their datasets to OSM. An example:</p
 <figcaption><span class="label">Fig. 2:</span> An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
 </figure>
 
-      <p>We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
-The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
-<code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
+      <p>We define 3 main classes: osm:Way, osm:Relation and osm:Node.</p>
+
+      <p>osm:from, osm:to and osm:via are predicates to indicate how a Relation maps Ways and Nodes.</p>
+
+      <p>osm:restriction is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
 
       <ol>
-        <li>osm:no_left_turn</li>
-        <li>osm:no_right_turn</li>
-        <li>osm:no_straight_on</li>
-        <li>osm:no_u_turn</li>
-        <li>osm:only_right_turn</li>
-        <li>osm:only_left_turn</li>
-        <li>osm:only_straight_on</li>
-        <li>osm:no_entry</li>
-        <li>osm:no_exit</li>
+        <li><code>osm:no_left_turn</code></li>
+        <li><code>osm:no_right_turn</code></li>
+        <li><code>osm:no_straight_on</code></li>
+        <li><code>osm:no_u_turn</code></li>
+        <li><code>osm:only_right_turn</code></li>
+        <li><code>osm:only_left_turn</code></li>
+        <li><code>osm:only_straight_on</code></li>
+        <li><code>osm:no_entry</code></li>
+        <li><code>osm:no_exit</code></li>
       </ol>
 
-      <p>The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
+      <p>The property <code>osm:nodes</code> is used to link to an <code>rdf:List</code> of <code>osm:Node</code> items.
 In one page, multiple lists can be described.
-If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
-The property <code>osm:members</code> is used to link to an <code>rdf:List</code> of <code>osm:Member</code> items.</p>
+If a Way crosses a tile, the other tile also mentioned the border Node in one of its <code>rdf:Lists</code>.</p>
 
       <h3 id="the-server">The Server</h3>
 
@@ -385,8 +350,7 @@ We discuss the open challenges in the last chapter.</p>
   <section id="conclusion">
       <h2>Conclusion and discussion</h2>
 
-      <p>In this paper, we introduced a specification for publishing Open Street Map’s roads as Linked Open Data 
-following the ideas behind <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Linked Data Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+      <p>In this paper, we introduced a specification for publishing Open Street Map’s roads as Linked Open Data following the ideas behind <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Linked Data Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
 We conclude with a list of benefits and open issues on this approach.</p>
 
       <p>Firstly, the server costs are lower as it does not have to answer any individual routing request.
@@ -399,31 +363,21 @@ Just like vector tiles styling, they can tailor the routing algorithm to their e
       <p>This also gives the benefit that not one server has to contain all of the world’s data.
 It opens the door to use cases where source selection also happens on the client and multiple sources are queried at once.
 Also for use cases outside the routing domain, routable tiles becomes useful.
-The hypermedia controls can be added as an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor to Comunica (future work for now)</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> 
-and help it solve geo-spatial queries over any data source by downloading only the right tiles.</p>
+The hypermedia controls can be added as an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor to Comunica (future work for now)</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> and help it solve geospatial queries over any data source by downloading only the right tiles.</p>
 
-      <p>A precondition in order to be queryable by Comunica, 
-is that the data is available in an RDF serialization.
-As we use JSON-LD with well thought-out context, 
-this data can be serialized into usable RDF.
-However, while the benefits of uniquely identifying Routable Tiles 
-and publish them on the Web as Linked Data Fragments are clear, 
-it still remains an open question if applying the Linked Data model 
-to the roads related data is the optimal approach.
-For example, when another source wants to do a statement 
-about a part of a road that is not yet an osm:Way instance, 
-how will this data be interoperable with this dataset?. 
-On the other hand, having a semantic vocabulary to describe 
-not only roads but all the elements that belong to the OSM terminology 
-opens the door for other data publishers to link their own data to the 
-OSM data source increasing the interoperability of their datasets.</p>
+      <p>A precondition in order to be queryable by Comunica, is that the data is available in an RDF serialization.
+As we use JSON-LD with predefined context, this data can be serialized into usable RDF.
+However, an open issue is still whether the Linked Data model as such is useful.
+<span class="comment" author="RV">rather, whether the extra effort pays off.</span>
+For example, when another source wants to do a statement about a part of a road that is not yet an <code>osm:Way</code> instance, how will this data be interoperable with this dataset?</p>
+<span class="comment" author="RV">Can we give some suggestions at least? Kind of undermining our point here without providing an answer.</span>
 
-      <p>In future work, we will benchmark the difference in size and performance 
-between Valhalla tiles (protobuf) and Routable Tiles (JSON-LD + gzip).
-Maybe there will be a need in the future for the Routable Tiles specification 
-to support a binary format in order to reduce size. 
-In  general, still several optimizations can be done, 
-such as applying contraction hierarchies and exposing data on multiple zoom levels.</p>
+      <p>In future work, we will benchmark the different in size and performance between Valhalla tiles (protobuf) and Routable Tiles (JSON-LD + gzip).
+Maybe there will be a need in the future for routable tiles specification that supports a binary format in order to reduce size.</p>
+
+      <p>In  general, still a lot of optimizations can be done, such as applying contraction hierarchies and exposing data on multiple zoom levels.</p>
+<span class="comment" author="RV">Can we have a stronger end, with an outlook and coupling back to the initial goal of integration?</span>
+
     </section>
 
 </main>
