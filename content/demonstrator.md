@@ -1,9 +1,7 @@
 ## Demonstrator
 {:#demonstrator}
 
-The server has been set-up for the entire world at [https://tiles.openplanner.team/planet/14/{x}/{y}/](https://tiles.openplanner.team/planet/14/8411/5485/).
-
-A live demonstrator using this data can be found at [https://openplannerteam.github.io/leaflet-routable-tiles/](https://openplannerteam.github.io/leaflet-routable-tiles/).
+The server has been set-up for the entire world at [https://tiles.openplanner.team/planet/14/{x}/{y}/](https://tiles.openplanner.team/planet/14/8411/5485/). A live demonstrator using this data can be found at [https://openplannerteam.github.io/leaflet-routable-tiles/](https://openplannerteam.github.io/leaflet-routable-tiles/).
 
 <figure id="listing2">
 <img src="img/routabletiles.png" class="printonly"/>

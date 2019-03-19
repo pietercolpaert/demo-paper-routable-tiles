@@ -26,6 +26,7 @@
 
   <ul id="authors">
     <li><a href="https://pietercolpaert.be" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
+    <li><a href="#harm" typeof="http://xmlns.com/foaf/0.1/Person" resource="#harm">Harm Delva</a></li>
     <li><a href="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen">Ben Abelshausen</a></li>
     <li><a href="#julian" typeof="http://xmlns.com/foaf/0.1/Person" resource="#julian">Julián Andrés Rojas Meléndez</a></li>
     <li><a href="https://ruben.verborgh.org/" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://ruben.verborgh.org/profile/#me">Ruben Verborgh</a></li>
@@ -40,7 +41,7 @@
   <section class="context">
     <h2 id="in-reply-to">In reply to</h2>
     <ul>
-      <li><a href="https://dhere.de/locweb/locweb2019/" rel="as:inReplyTo">The Web Conference 2019 International Workshop on Location and the Web</a></li>
+      <li><a href="https://2019.eswc-conferences.org/call-for-posters-and-demos/" rel="as:inReplyTo">Call For Posters and Demos ESWC 2019</a></li>
     </ul>
   </section>
 
@@ -79,47 +80,43 @@ In a demo, we show how client-side code can automatically discover tiles and per
 <!-- Findings     -->
 We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
 <!-- Conclusion and Perspectives -->
-The preliminary conclusions of this work put forward more questions than answers: 
+<!-- The preliminary conclusions of this work put forward more questions than answers: 
 are existing RDF serializations compact enough for an acceptable user experience? 
 What happens when another dataset needs to introduce new nodes that are not in the base map? 
-Can other hypermedia structures be thought of?</p>
+Can other hypermedia structures be thought of?--></p>
+
   </section>
 
 
 <main>
   <!-- Add sections by specifying their file name, excluding the '.md' suffix. -->
   <section>
-      <div class="printonly">This is a print-version of a paper first written for the Web. The Web-version is available at http://pieter.pm/locweb2019-theweb-routable-tiles/</div>
+      <div class="printonly">This is a print-version of a paper first written for the Web. The Web-version is available at http://pieter.pm/demo-paper-routable-tiles/</div>
 
       <h2 id="introduction">Introduction</h2>
 
       <p>When setting up a Web-based journey planner that takes into account individual user needs, 
 developers are confronted with the daunting prospect of integrating heterogeneous datasets. 
-Industry players provide an alternative solution to this tangle, 
+Industry players provide an alternative solution to these complexities, 
 by providing services on top of their datasets that are centralized in one location. 
-They are able to provide a solution for the Pareto principle’s 80% 
+They are able to provide a solution for the ~80% of the world-wide needs 
 and build a business around that. 
 When trying to cater to the remaining 20%, 
 industrial route planners are quickly confronted 
-with diminishing returns of integrating more datasets.</p>
-
-      <p>Take for example use cases of people owning a foldable bike 
-that can take their bike on public transport, 
-companies trying to find an optimal delivery route for their delivery service 
-where some vehicles cannot pass through low emission zones, 
-routes based on the real-time state of traffic control systems 
-and probability to hit a green light 
-or people with special constraints or disabilities.</p>
-
-      <p>For each of these use cases, 
+with diminishing returns of integrating more datasets.
+Take for example use cases of (i) people owning a foldable bike and the ability to take their bike on public transport, 
+(ii) companies trying to find an optimal delivery route for their delivery service where some vehicles cannot pass through low emission zones, 
+(iii) routes based on the real-time state of traffic control systems and probability to hit a green light,
+or (iv) people with special constraints or disabilities.
+For each of these four use cases, 
 extra datasets are needed to calculate these end-user specific routing graphs. 
-Such datasets are published by different organizations 
+Such datasets are published by different organizations
 that often publish them openly, thanks to strategic goals or legal mandates. 
 Every route planner will somehow need to compile their own sources 
 over which they can execute their own route planning algorithm.</p>
 
       <p>In this paper, we aim to automate data adoption in route planners 
-and as a first step we decided to introduce “Routable Tiles”. 
+and—as a first step—we introduce “Routable Tiles”. 
 Routable Tiles is a specification in which we republished all the roads in Open Street Map 
 using a tiling mechanism that exploits Open Data principles. 
 In the next section we will see that the ideas behind Routable Tiles itself is not novel, 
@@ -132,6 +129,7 @@ The browser itself can perform a routing algorithm on the client-side,
 and every step in the routing algorithm can involve other weights and datasets as it pleases. 
 This first prototype exploiting Open Data principles probably introduces more questions than answers 
 as we discuss in the conclusion and discussion section.</p>
+
     </section>
 
   <section id="sota">
@@ -364,9 +362,7 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/�
   <section id="demonstrator">
       <h2>Demonstrator</h2>
 
-      <p>The server has been set-up for the entire world at <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/</a>.</p>
-
-      <p>A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
+      <p>The server has been set-up for the entire world at <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/</a>. A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
 
       <figure id="listing2">
 <img src="img/routabletiles.png" class="printonly" />

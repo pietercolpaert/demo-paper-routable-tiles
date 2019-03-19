@@ -21,7 +21,7 @@ In a demo, we show how client-side code can automatically discover tiles and per
 <!-- Findings     -->
 We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
 <!-- Conclusion and Perspectives -->
-The preliminary conclusions of this work put forward more questions than answers: 
+<!-- The preliminary conclusions of this work put forward more questions than answers: 
 are existing RDF serializations compact enough for an acceptable user experience? 
 What happens when another dataset needs to introduce new nodes that are not in the base map? 
-Can other hypermedia structures be thought of?
+Can other hypermedia structures be thought of?-->
