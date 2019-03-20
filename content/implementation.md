@@ -1,33 +1,22 @@
 ## Implementation
 {:#implementation}
 
-### The Specification
+Routable Tiles is a JSON-LD specification for which the working draft can be found at [https://openplanner.team/specs/2018-11-routable-tiles.html](https://openplanner.team/specs/2018-11-routable-tiles.html).
+It has three main aspects: (i) it introduces a *hypermedia specification* reusing Hydra Collections for describing a tile server, (ii) a way to describe *Open Street Map’s nodes, ways and relations*; and (iii) it introduces a mapping of the Open Street Map basic terms to an RDFS vocabulary.
 
-Routable Tiles is a JSON-LD specification and the draft can be found at [https://openplanner.team/specs/2018-11-routable-tiles.html](https://openplanner.team/specs/2018-11-routable-tiles.html).
-It has several aspects:
+The Linked Geo Data vocabulary has been unavailable since 2018 and not updated since 2015.
+Therefore we introduced our own vocabulary, that nonetheless takes a different approach.
+Instead of mapping everything, we decided to map only the bare minimum needed specifically for the use case or route planing.
+Therefore, we keep the ontology as close as possible to the actual OSM data model.
 
- 1. It introduces a hypermedia specification reusing Hydra Collections for describing a tile server
- 2. For a server to be compliant to routable tiles, nodes, ways and restrictions needs to be modeled.
- 3. It introduces a mapping of the Open Street Map terms to an RDFS vocabulary
+We define 3 main classes: *osm:Way*, *osm:Relation* and *osm:Node*.
+The *osm:members* property describes the members of the relation and the *osm:role* their function in the relation.
+*osm:restriction* is used to model turn restrictions.
 
-### The Ontology
-
-The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. 
-OSM terms are well-known among the developer community, 
-which increases the adoption and facilitates the understanding of the ontology. 
-Moreover, having an OSM ontology will allow other data providers 
-to reuse the OSM terminology and thus link their datasets to OSM. An example:
-
-We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
-The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
-<code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:
-
-The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
+The property *osm:nodes* is used to link to an *rdf:List* of *osm:Node* items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
-The property <code>osm:members</code> is used to link to an <code>rdf:List</code> of <code>osm:Member</code> items.
-
-### The Server
+The property *osm:members* is used to link to an *rdf:List* of *osm:Member* items.
 
 The mapping scripts and server interface can be found at [https://github.com/openplannerteam/routeable-tiles](https://github.com/openplannerteam/routeable-tiles).
 Every tile in Open Street Map on zoom level 14 is on the fly made available as JSON-LD.

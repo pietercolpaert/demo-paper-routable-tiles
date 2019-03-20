@@ -1,4 +1,4 @@
-<div class="printonly">Read the HTML-version: <a href="http://pieter.pm/demo-paper-routable-tiles/">http://pieter.pm/demo-paper-routable-tiles/</a></div>
+<div class="printonly">Read the HTML-version: <a href="https://pieter.pm/demo-paper-routable-tiles/">http://pieter.pm/demo-paper-routable-tiles/</a></div>
 
 ## Introduction
 {:#introduction}
