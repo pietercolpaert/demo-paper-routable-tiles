@@ -218,22 +218,20 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">openstreetma
   <section id="demonstrator">
       <h2>Demonstrator</h2>
 
-      <p>The server has been set-up for the entire world at <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/</a>. A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
-
-      <figure id="listing2">
-<div class="printonly">
-<!--<img src="img/routabletiles.png" class="printonly"/>-->
-See the <a href="http://pieter.pm/demo-paper-routable-tiles/#demonstrator">online paper</a> which includes the demo, or visit <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>
+      <p>A server instance is set up publishing data for <em>the entire world</em>.
+Entry points into the hypermedia API can be found through <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/ (e.g., with x 8411 and y 5485</a>.
+A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
+      <div class="printonly">The demonstrator shows a map of all roads (in Portorož by default) in the viewport.
+The map is drawn on the client-side based on the JSON-LD documents fragmented in tiles.
+When clicking 2 locations on the map, the same JSON-LD documents are used to perform a Dijkstra shortest path algorithm.
 </div>
+
+      <figure id="listing2" class="noprint">
+<!--<img src="img/routabletiles.png" class="printonly"/>-->
 <iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/#latitude=45.515570&amp;longitude=13.595109" style="width: 100%; height: 50vh;">
 </iframe>
 <figcaption><span class="label">Fig. 1:</span> A demonstrator of what you can do with Routable Tiles. You can pan around, select another city, and calculate a shortest path. Both rendering the map and the route planning happens on the client-side while loading the tiles dynamically.</figcaption>
 </figure>
-
-      <p>The data is used for rendering the map as well as routing.
-As every tile contains global identifiers for each Way, Node and Relation, these identifiers can be reused by third parties.
-Furthermore, the properties that are added on top of these resources can share properties, and automated alignment through reasoning can enrich the existing data.
-We discuss the open challenges in the last chapter.</p>
 
     </section>
 
