@@ -12,7 +12,7 @@ by providing a common set of semantics that can be reused by data publishers.
  
 Slippy maps are maps often included in web-pages on which you can pan around.
 In order to reduce server load, the client is preconfigured with a URL template of the web-server containing image tiles.
-E.g., <code>https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.
+<!--E.g., <code>https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.-->
 When the map is loaded, the client can calculate all URLs necessary.
 Vector tiles reuse this idea to, instead of raster images, publish the raw data behind the tiles.
 The client can then render the maps on the client-side.

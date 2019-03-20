@@ -14,12 +14,9 @@ to the roads related data is the optimal approach.
 For example, when another source wants to do a statement 
 about a part of a road, chances are low it is already available as a separate osm:Way instance, and thus the source data would have to be altered to split the original entity into two.
 
-In future work, we will benchmark the difference in size and performance 
+There might be a need in the future to support a binary format in order to reduce size. 
+Therefore, we will benchmark the difference in size and performance 
 between Valhalla tiles (protobuf) and Routable Tiles (JSON-LD + gzip).
-Maybe there will be a need in the future for the Routable Tiles specification 
-to support a binary format in order to reduce size. 
-In general, still several other optimizations can be done, 
-such as applying summaries over different zoom levels.
-In order to achieve better adoption of the hypermedia controls,
-an [actor will be added to the Linked Data query agent called Comunica](cite:cites taelman_iswc_2018).
+By doing this, we should also look at other optimizations, such as applying summaries over different zoom levels.
+In order to achieve better adoption of the hypermedia controls, an [actor will be added to the Linked Data query agent called Comunica](cite:cites taelman_iswc_2018).
 This way, we will help to solve geo-spatial queries over any data source by downloading only the right tiles even beyond road networks.

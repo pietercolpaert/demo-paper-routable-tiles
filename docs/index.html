@@ -146,7 +146,7 @@ by providing a common set of semantics that can be reused by data publishers.</p
 
       <p>Slippy maps are maps often included in web-pages on which you can pan around.
 In order to reduce server load, the client is preconfigured with a URL template of the web-server containing image tiles.
-E.g., <code>https:/​/​{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.
+<!--E.g., <code>https:/​/​{s}.tile.openstreetmap.org/{z}/{x}/{y}.png</code>, where <code>s</code> denotes a subdomain to be used, <code>z</code> the zoom-level the slippy map is at, and <code>x</code> and <code>y</code> are the coordinates of the upper left corner of the tile.-->
 When the map is loaded, the client can calculate all URLs necessary.
 Vector tiles reuse this idea to, instead of raster images, publish the raw data behind the tiles.
 The client can then render the maps on the client-side.
@@ -220,7 +220,7 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">openstreetma
       <h2>Demonstrator</h2>
 
       <p>A server instance is set up publishing data for <em>the entire world</em>.
-Entry points into the hypermedia API can be found through <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/ (e.g., with x 8411 and y 5485)</a>.
+Entry points into the hypermedia API can be found through <a href="https://tiles.openplanner.team/planet/14/8411/5485/">tiles.openplanner.team/planet/14/{x}/{y}/ (e.g., with x 8411 and y 5485)</a>.
 A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
       <div class="printonly">The demonstrator shows a map of all roads (in Portorož by default) in the viewport.
 The map is drawn on the client-side based on the JSON-LD documents fragmented in tiles.
@@ -252,14 +252,11 @@ to the roads related data is the optimal approach.
 For example, when another source wants to do a statement 
 about a part of a road, chances are low it is already available as a separate osm:Way instance, and thus the source data would have to be altered to split the original entity into two.</p>
 
-      <p>In future work, we will benchmark the difference in size and performance 
+      <p>There might be a need in the future to support a binary format in order to reduce size. 
+Therefore, we will benchmark the difference in size and performance 
 between Valhalla tiles (protobuf) and Routable Tiles (JSON-LD + gzip).
-Maybe there will be a need in the future for the Routable Tiles specification 
-to support a binary format in order to reduce size. 
-In general, still several other optimizations can be done, 
-such as applying summaries over different zoom levels.
-In order to achieve better adoption of the hypermedia controls,
-an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor will be added to the Linked Data query agent called Comunica</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+By doing this, we should also look at other optimizations, such as applying summaries over different zoom levels.
+In order to achieve better adoption of the hypermedia controls, an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor will be added to the Linked Data query agent called Comunica</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
 This way, we will help to solve geo-spatial queries over any data source by downloading only the right tiles even beyond road networks.</p>
 
     </section>
