@@ -220,7 +220,7 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">openstreetma
       <h2>Demonstrator</h2>
 
       <p>A server instance is set up publishing data for <em>the entire world</em>.
-Entry points into the hypermedia API can be found through <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/ (e.g., with x 8411 and y 5485</a>.
+Entry points into the hypermedia API can be found through <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/ (e.g., with x 8411 and y 5485)</a>.
 A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
       <div class="printonly">The demonstrator shows a map of all roads (in Portorož by default) in the viewport.
 The map is drawn on the client-side based on the JSON-LD documents fragmented in tiles.
@@ -237,47 +237,30 @@ When clicking 2 locations on the map, the same JSON-LD documents are used to per
     </section>
 
   <section id="conclusion">
-      <h2>Conclusion and discussion</h2>
+      <h2>Conclusion and future work</h2>
 
-      <p>In this paper, we introduced a specification for publishing Open Street Map’s roads as Linked Open Data 
-following the ideas behind <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Linked Data Fragments</a></span> <span class="references">[<a href="#ref-4">4</a>]</span>.
-We conclude with a list of benefits and open issues on this approach.</p>
+      <p>This demo introduced a tiling mechanism for publishing road networks in Linked Data.
+Compared to a SPARQL endpoint approach or server answering any individual route planning request,
+the server costs in our approach are indisputably lower.
+Thanks to the hypermedia controls, the full dataset can be automatically discovered, and HTTP caching can be leveraged.
+Furthermore, developers of route planning application are given more flexibility as they are now in full control of the algorithm.
+Just like vector tiles styling, they can tailor the routing algorithm to their end-user needs in the browser.
+This also opens the door to use cases where multiple sources are queried at once.</p>
 
-      <p>Firstly, the server costs are lower as it does not have to answer any individual routing request.
-Instead it sends the data itself to the client that needs to perform the algorithm itself.
-The URLs that are requested are the same thanks to the hypermedia controls and HTTP caching can be leveraged.
-Next to the fact that server-costs become limited, it also gives flexibility to developers using the data.
-They do not have to contact the server-administrators of these open datasets for new features to add.
-Just like vector tiles styling, they can tailor the routing algorithm to their end-user needs in the browser.</p>
-
-      <p>This also gives the benefit that not one server has to contain all of the world’s data.
-It opens the door to use cases where source selection also happens on the client and multiple sources are queried at once.
-Also for use cases outside the routing domain, routable tiles becomes useful.
-The hypermedia controls can be added as an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor to Comunica (future work for now)</a></span> <span class="references">[<a href="#ref-3">3</a>]</span> 
-and help it solve geo-spatial queries over any data source by downloading only the right tiles.</p>
-
-      <p>A precondition in order to be queryable by Comunica, 
-is that the data is available in an RDF serialization.
-As we use JSON-LD with well thought-out context, 
-this data can be serialized into usable RDF.
-However, while the benefits of uniquely identifying Routable Tiles 
-and publish them on the Web as Linked Data Fragments are clear, 
-it still remains an open question if applying the Linked Data model 
+      <p>Nevertheless, it still remains an open question if applying this kind of Linked Data model/HTTP URIs
 to the roads related data is the optimal approach.
 For example, when another source wants to do a statement 
-about a part of a road that is not yet an osm:Way instance, 
-how will this data be interoperable with this dataset? 
-On the other hand, having a semantic vocabulary to describe 
-not only roads but all the elements that belong to the OSM terminology 
-opens the door for other data publishers to link their own data to the 
-OSM data source increasing the interoperability of their datasets.</p>
+about a part of a road, chances are low it is already available as a separate osm:Way instance, and thus the source data would have to be altered to split the original entity into two.</p>
 
       <p>In future work, we will benchmark the difference in size and performance 
 between Valhalla tiles (protobuf) and Routable Tiles (JSON-LD + gzip).
 Maybe there will be a need in the future for the Routable Tiles specification 
 to support a binary format in order to reduce size. 
-In  general, still several optimizations can be done, 
-such as applying contraction hierarchies and exposing data on multiple zoom levels.</p>
+In general, still several other optimizations can be done, 
+such as applying summaries over different zoom levels.
+In order to achieve better adoption of the hypermedia controls,
+an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor will be added to the Linked Data query agent called Comunica</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+This way, we will help to solve geo-spatial queries over any data source by downloading only the right tiles even beyond road networks.</p>
 
     </section>
 
