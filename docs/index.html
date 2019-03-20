@@ -91,7 +91,7 @@ Can other hypermedia structures be thought of?--></p>
 <main>
   <!-- Add sections by specifying their file name, excluding the '.md' suffix. -->
   <section>
-      <div class="printonly">This is a print-version of a paper first written for the Web. The Web-version is available at http://pieter.pm/demo-paper-routable-tiles/</div>
+      <div class="printonly">Read the HTML-version: <a href="http://pieter.pm/demo-paper-routable-tiles/">http:/​/​pieter.pm/demo-paper-routable-tiles/</a></div>
 
       <h2 id="introduction">Introduction</h2>
 
@@ -162,16 +162,20 @@ The technology proposes a <a href="https://github.com/valhalla/valhalla/blob/mas
 Tiling the data makes sure the server can be selective about the data that needs to be loaded into memory in order to execute an individual request.
 This tiling specification in Valhalla is however not used as an exchange format – although offline routing is an upcoming feature – and interoperability with other datasets is not a focus.</p>
 
+      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="http://jens-lehmann.org/files/2012/linkedgeodata2.pdf">Linked Geo Data</a> <span class="references">[<a href="#ref-2">2</a>]</span> is an initiative that maps Open Street Map data to Linked Data.
+It releases data dumps, subject pages and a SPARQL endpoint.
+Furthermore, it has their own mappings from the Open Street Map data model to a Linked Geo Data ontology.</p>
+
       <h3 id="open-data-publishing">Open Data publishing</h3>
 
       <p>Open Data can be published in various interfaces.
-In order to be able to query these interfaces, <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> was built.
-It is a Linked Data user agent that can run federated queries over several heterogeneous Web APIs, such as data dumps, SPARQL endpoints, Linked Data documents and <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+In order to be able to query these interfaces, <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica</a></span> <span class="references">[<a href="#ref-3">3</a>]</span> was built.
+It is a Linked Data user agent that can run federated queries over several heterogeneous Web APIs, such as data dumps, SPARQL endpoints, Linked Data documents and <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">[<a href="#ref-4">4</a>]</span>.
 This engine has been developed to make it easy to plug in specific types of functionality as separate modules. Such modules can be added or removed depending on the configuration. As such, by looking for affordances in Web APIs, more intelligent user agents can be created.
 Preconditions for an engine like Comunica to work with a dataset is: supporting a Linked Data representation and allowing cross origin resource sharing headers in the HTTP responses.
 The better the data is split in fragments, the better the caching will be able to provide a faster user-perceived performance.</p>
 
-      <p>For public transport systems, instead of publishing a dump of time schedules or a full fletched route planner, <a property="schema:citation http://purl.org/spar/cito/cites" href="http://ceur-ws.org/Vol-1486/paper_28.pdf">Linked Connections</a> <span class="references">[<a href="#ref-4">4</a>]</span> proposes a publishing mechanism that gives clients access to the data in time fragments.
+      <p>For public transport systems, instead of publishing a dump of time schedules or a full fletched route planner, <a property="schema:citation http://purl.org/spar/cito/cites" href="http://ceur-ws.org/Vol-1486/paper_28.pdf">Linked Connections</a> <span class="references">[<a href="#ref-5">5</a>]</span> proposes a publishing mechanism that gives clients access to the data in time fragments.
 It uses departure-arrival pairs from a station to another (a connection), and orders these connections by departure time.
 It then fragments this dataset in documents that can be published over HTTP.
 Links in the responses ensure a client can always find more information to take into account.</p>
@@ -251,7 +255,7 @@ We discuss the open challenges in the last chapter.</p>
       <h2>Conclusion and discussion</h2>
 
       <p>In this paper, we introduced a specification for publishing Open Street Map’s roads as Linked Open Data 
-following the ideas behind <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Linked Data Fragments</a></span> <span class="references">[<a href="#ref-3">3</a>]</span>.
+following the ideas behind <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Linked Data Fragments</a></span> <span class="references">[<a href="#ref-4">4</a>]</span>.
 We conclude with a list of benefits and open issues on this approach.</p>
 
       <p>Firstly, the server costs are lower as it does not have to answer any individual routing request.
@@ -264,7 +268,7 @@ Just like vector tiles styling, they can tailor the routing algorithm to their e
       <p>This also gives the benefit that not one server has to contain all of the world’s data.
 It opens the door to use cases where source selection also happens on the client and multiple sources are queried at once.
 Also for use cases outside the routing domain, routable tiles becomes useful.
-The hypermedia controls can be added as an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor to Comunica (future work for now)</a></span> <span class="references">[<a href="#ref-2">2</a>]</span> 
+The hypermedia controls can be added as an <span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15"><a href="https://comunica.github.io/Article-ISWC2018-Resource/">actor to Comunica (future work for now)</a></span> <span class="references">[<a href="#ref-3">3</a>]</span> 
 and help it solve geo-spatial queries over any data source by downloading only the right tiles.</p>
 
       <p>A precondition in order to be queryable by Comunica, 
@@ -300,10 +304,12 @@ such as applying contraction hierarchies and exposing data on multiple zoom leve
   <dt id="ref-1">[1]</dt>
   <dd resource="https://www.w3.org/TR/sdw-bp/" typeof="schema:CreativeWork">Tandy, J., Barnaghi, P., van den Brink, L.: Spatial Data on the Web Best Practices. W3C, <a href="https://www.w3.org/TR/sdw-bp/">https:/​/​www.w3.org/TR/sdw-bp/</a> (2017).</dd>
   <dt id="ref-2">[2]</dt>
-  <dd resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Vrandečić, D., Bontcheva, K., Suárez-Figueroa, M.C., Presutti, V., Celino, I., Sabou, M., Kaffee, L.-A., and Simperl, E. (eds.) Proceedings of the 17th International Semantic Web Conference. pp. 239–255. Springer (2018).</dd>
+  <dd resource="http://jens-lehmann.org/files/2012/linkedgeodata2.pdf" typeof="schema:Article">Stadler, C., Lehmann, J., Höffner, K., Auer, S.: LinkedGeoData: A Core for a Web of Spatial Open Data. Semantic Web Journal. 3, 333–354 (2012).</dd>
   <dt id="ref-3">[3]</dt>
-  <dd resource="https://dx.doi.org/10.1016/j.websem.2016.03.003" typeof="schema:Article">Verborgh, R., Vander Sande, M., Hartig, O., Van Herwegen, J., De Vocht, L., De Meester, B., Haesendonck, G., Colpaert, P.: Triple Pattern Fragments: a Low-cost Knowledge Graph Interface for the Web. Journal of Web Semantics. 37–38, (2016).</dd>
+  <dd resource="https://dx.doi.org/10.1007/978-3-030-00668-6_15" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Vrandečić, D., Bontcheva, K., Suárez-Figueroa, M.C., Presutti, V., Celino, I., Sabou, M., Kaffee, L.-A., and Simperl, E. (eds.) Proceedings of the 17th International Semantic Web Conference. pp. 239–255. Springer (2018).</dd>
   <dt id="ref-4">[4]</dt>
+  <dd resource="https://dx.doi.org/10.1016/j.websem.2016.03.003" typeof="schema:Article">Verborgh, R., Vander Sande, M., Hartig, O., Van Herwegen, J., De Vocht, L., De Meester, B., Haesendonck, G., Colpaert, P.: Triple Pattern Fragments: a Low-cost Knowledge Graph Interface for the Web. Journal of Web Semantics. 37–38, (2016).</dd>
+  <dt id="ref-5">[5]</dt>
   <dd resource="http://ceur-ws.org/Vol-1486/paper_28.pdf" typeof="schema:Article">Colpaert, P., Llaves, A., Verborgh, R., Corcho, O., Mannens, E., Van de Walle, R.: Intermodal public transit routing using Linked Connections. In: Proceedings of the 14th International Semantic Web Conference: Posters and Demos (2015).</dd>
 </dl>
 </section>
