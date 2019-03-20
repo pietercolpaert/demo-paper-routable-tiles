@@ -20,7 +20,7 @@ to reuse the OSM terminology and thus link their datasets to OSM. An example:
 
 We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
 The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
-<code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:
+<code>osm:restriction</code> is used to model turn restrictions.
 
 The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
 In one page, multiple lists can be described.

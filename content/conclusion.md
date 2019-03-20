@@ -28,7 +28,7 @@ it still remains an open question if applying the Linked Data model
 to the roads related data is the optimal approach.
 For example, when another source wants to do a statement 
 about a part of a road that is not yet an osm:Way instance, 
-how will this data be interoperable with this dataset?. 
+how will this data be interoperable with this dataset? 
 On the other hand, having a semantic vocabulary to describe 
 not only roads but all the elements that belong to the OSM terminology 
 opens the door for other data publishers to link their own data to the 
