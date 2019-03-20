@@ -26,9 +26,9 @@
 
   <ul id="authors">
     <li><a href="https://pietercolpaert.be" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
-    <li><a href="#harm" typeof="http://xmlns.com/foaf/0.1/Person" resource="#harm">Harm Delva</a></li>
     <li><a href="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://wiki.openstreetmap.org/wiki/User:Ben.abelshausen">Ben Abelshausen</a></li>
     <li><a href="#julian" typeof="http://xmlns.com/foaf/0.1/Person" resource="#julian">Julián Andrés Rojas Meléndez</a></li>
+    <li><a href="#harm" typeof="http://xmlns.com/foaf/0.1/Person" resource="#harm">Harm Delva</a></li>
     <li><a href="https://ruben.verborgh.org/" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://ruben.verborgh.org/profile/#me">Ruben Verborgh</a></li>
   </ul>
 
@@ -59,7 +59,7 @@
 <section id="abstract">
     <h2>Abstract</h2>
     <!-- Context      -->
-    <p>Today, route planning providers manually integrate different geo-spatial datasets 
+    <p>Route planning providers manually integrate different geo-spatial datasets 
 before offering a Web service to developers, thus creating a closed world view. 
 In contrast, combining open datasets at runtime 
 can provide more information for user-specific route planning needs. 
@@ -115,20 +115,20 @@ that often publish them openly, thanks to strategic goals or legal mandates.
 Every route planner will somehow need to compile their own sources 
 over which they can execute their own route planning algorithm.</p>
 
-      <p>In this paper, we aim to automate data adoption in route planners 
-and—as a first step—we introduce “Routable Tiles”. 
-Routable Tiles is a specification in which we republished all the roads in Open Street Map 
-using a tiling mechanism that exploits Open Data principles. 
-In the next section we will see that the ideas behind Routable Tiles itself is not novel, 
-yet to the best of our knwoledge, 
-publishing routable tiles for clients to consume has not been done before.</p>
+      <p>In this paper, we aim to automate data adoption in route planners.
+As a first step, we introduce <em>Routable Tiles</em>. 
+This is a hypermedia specification for geospatial road networks.
+In this specification, we republished all the roads in Open Street Map.
+In the next section we will see that the ideas behind Routable Tiles itself is not novel.
+The contribution of this paper lies in applying the geospatial indexing idea from the database world
+to Web APIs, introducing an ontology for describing geospatial hypermedia controls,
+and launching this world-wide dataset as a resource to the Semantic Web community.</p>
 
-      <p>After introducing the ontology, specification and server software, 
+      <!--After introducing the ontology, specification and server software, 
 we demonstrate what now becomes possible in an in-browser demo. 
-The browser itself can perform a routing algorithm on the client-side, 
-and every step in the routing algorithm can involve other weights and datasets as it pleases. 
-This first prototype exploiting Open Data principles probably introduces more questions than answers 
-as we discuss in the conclusion and discussion section.</p>
+The browser itself can perform a routing algorithm, 
+and every step in the routing algorithm can thus involve other weights and datasets as it pleases.
+Finally, we discuss the open challenges that arose publishing the data for client-side adoption in the conclusion and discussion section.-->
 
     </section>
 
@@ -192,55 +192,6 @@ It has several aspects:</p>
         <li>It introduces a mapping of the Open Street Map terms to an RDFS vocabulary</li>
       </ol>
 
-      <h4 id="hypermedia">Hypermedia</h4>
-
-      <p>In the geospatial world, standards such as WMS and WFS, seek for strict contracts between servers and agents.
-While in the Linked Open Data world, hypermedia controls are used to express what building blocks are supported by the server.
-From every document, another document can be reached by interpreting the metadata.
-Intelligent agents crawl over this data in order to find answers to queries.</p>
-
-      <figure class="" id="listing1">
-<code>
-<pre>
-{
-  "@id": "«currentPageURL»",
-  "tiles:zoom": 14,
-  "tiles:longitudeTile": 8398,
-  "tiles:latitudeTile": 5463,
-  "dcterms:isPartOf": {
-    "@id": "https://tiles.openplanner.team/planet",
-    "@type": "hydra:Collection",
-    "dcterms:license":
-            "http://opendatacommons.org/licenses/odbl/1-0/",
-    "dcterms:rights":
-            "http://www.openstreetmap.org/copyright",
-    "hydra:search": {
-      "@type": "hydra:IriTemplate",
-      "hydra:template": "https://tiles.openplanner.team/14/{x}/{y}",
-      "hydra:variableRepresentation": "hydra:BasicRepresentation",
-      "hydra:mapping": [
-        {
-          "@type": "hydra:IriTemplateMapping",
-          "hydra:variable": "x",
-          "hydra:property": "tiles:longitudeTile",
-          "hydra:required": true
-        },
-        {
-          "@type": "hydra:IriTemplateMapping",
-          "hydra:variable": "y",
-          "hydra:property": "tiles:latitudeTile",
-          "hydra:required": true
-        }
-      ]
-    }
-  },
-  "@graph" : [ ... <a href="#the-ontology">other data</a> ... ]
-}
-</pre>
-</code>
-<figcaption><span class="label">Fig. 1:</span> Example implementation of the routable tiles hypermedia: the description of the tile is given, as well as a search form in a hydra:Collection with a URL template well-known in the geospatial world. For the @context, see the full specification at https://openplanner.team/specs/2018-11-routable-tiles.html</figcaption>
-</figure>
-
       <h3 id="the-ontology">The Ontology</h3>
 
       <p>The ontology is kept as a direct mapping from OSM terms to a Linked Data ontology. 
@@ -249,94 +200,9 @@ which increases the adoption and facilitates the understanding of the ontology.
 Moreover, having an OSM ontology will allow other data providers 
 to reuse the OSM terminology and thus link their datasets to OSM. An example:</p>
 
-      <figure class="" id="code-example-nodes-ways">
-<code>
-<pre>
-{
-  "@context" : {
-     ... <a href="#hypermedia">See section on hypermedia</a> ...
-  },
-  "@graph": [
-    {
-      "@id": "#Way1",
-      "@type": "osm:Way",
-      "rdfs:label": "Chaussée de Haecht - Haachtsesteenweg",
-      "osm:maxspeed": "30",
-      "osm:highway": "osm:tertiary",
-      "osm:nodes" : [ "#Node1", "#Node2" ]
-    },
-    {
-      "@id": "#Node1",
-      "geo:long": 3.14,
-      "geo:lat": 51.2
-    },
-    {
-      "@id": "#Node2",
-      "geo:long": 3.12,
-      "geo:lat": 51.32
-      "osm:barrier": "osm:bollard"
-      "osm:foot": "osm:yes"
-      "osm:bicycle": "osm:yes"
-    },
-    {
-      "@id": "#Node3",
-      "geo:long": 3.22,
-      "geo:lat": 51.22
-    },
-    {
-      "@id": "#Way2",
-      "@type": "osm:Way",
-      "rdfs:label": "Rue Cornet de Grez - Cornet de Grezstraat",
-      "osm:highway": "osm:residential",
-      "osm:oneway": "yes",
-      "osm:oneway-bicycle": "no",
-      "osm:highway": "osm:tertiary",
-      "osm:nodes" : [ "#Node1", "#Node3" ]
-    },
-    {
-      "@id": "#TurnRestriction1",
-      "@type": "osm:Relation",
-      "osm:restriction":"osm:no_right_turn",
-      "osm:members" : [
-        {
-          "@id": "#Way1",
-          "@type": "osm:Way",
-          "osm:role": "osm:from"
-        },
-        {
-          "@id": "#Way2",
-          "@type": "osm:Way",
-          "osm:role": "osm:to"
-        },
-        {
-          "@id": "#Node1",
-          "@type": "osm:Node",
-          "osm:role": "osm:via"
-        }
-      ]
-    }
-  ]
-}
-  </pre>
-</code>
-<figcaption><span class="label">Fig. 2:</span> An example of two  Ways, a couple of Nodes, one containing a bollard, and a restriction to turn right.</figcaption>
-</figure>
-
       <p>We define 3 main classes: <code>osm:Way</code>, <code>osm:Relation</code> and <code>osm:Node</code>.
 The <code>osm:members</code> property describes the members of the relation and the <code>osm:role</code> their function in the relation.
 <code>osm:restriction</code> is used to model turn restrictions. There are <a href="https://wiki.openstreetmap.org/wiki/Relation:restriction">9 possibilities as a range</a>:</p>
-
-      <ol>
-        <li>osm:no_left_turn</li>
-        <li>osm:no_right_turn</li>
-        <li>osm:no_straight_on</li>
-        <li>osm:no_u_turn</li>
-        <li>osm:only_right_turn</li>
-        <li>osm:only_left_turn</li>
-        <li>osm:only_straight_on</li>
-        <li>osm:no_entry</li>
-        <li>osm:no_exit</li>
-      </ol>
 
       <p>The property <code>osm:nodes</code> is used to link to an r<code>df:List</code> of <code>osm:Node</code> items.
 In one page, multiple lists can be described.
@@ -351,7 +217,7 @@ Special attention was given to the HTTP server to include a server-side cache an
 Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
 Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.</p>
 
-      <p>Due to <a href="https://github.com/whatwg/fetch/issues/862">a recent change in the WhatWG fetch specification</a>, there is also a need for supporting the OPTIONS method, that specifically allows all headers in its response.</p>
+      <!--Due to [a recent change in the WhatWG fetch specification](https://github.com/whatwg/fetch/issues/862), there is also a need for supporting the OPTIONS method, that specifically allows all headers in its response.-->
 
       <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
@@ -365,10 +231,13 @@ For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/�
       <p>The server has been set-up for the entire world at <a href="https://tiles.openplanner.team/planet/14/8411/5485/">https:/​/​tiles.openplanner.team/planet/14/{x}/{y}/</a>. A live demonstrator using this data can be found at <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>.</p>
 
       <figure id="listing2">
-<img src="img/routabletiles.png" class="printonly" />
-<iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/#latitude=37.80842772926481&amp;longitude=-122.46871948242189" style="width: 100%; height: 50vh;">
+<div class="printonly">
+<!--<img src="img/routabletiles.png" class="printonly"/>-->
+See the <a href="http://pieter.pm/demo-paper-routable-tiles/#demonstrator">online paper</a> which includes the demo, or visit <a href="https://openplannerteam.github.io/leaflet-routable-tiles/">https:/​/​openplannerteam.github.io/leaflet-routable-tiles/</a>
+</div>
+<iframe class="noprint" src="https://openplannerteam.github.io/leaflet-routable-tiles/#latitude=45.515570&amp;longitude=13.595109" style="width: 100%; height: 50vh;">
 </iframe>
-<figcaption><span class="label">Fig. 3:</span> A demonstrator of what you can do with Routable Tiles. You can pan around, select another city, and calculate a shortest path. Both rendering the map and the route planning happens on the client-side while loading the tiles dynamically.</figcaption>
+<figcaption><span class="label">Fig. 1:</span> A demonstrator of what you can do with Routable Tiles. You can pan around, select another city, and calculate a shortest path. Both rendering the map and the route planning happens on the client-side while loading the tiles dynamically.</figcaption>
 </figure>
 
       <p>The data is used for rendering the map as well as routing.

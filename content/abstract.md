@@ -1,6 +1,6 @@
 ## Abstract
 <!-- Context      -->
-Today, route planning providers manually integrate different geo-spatial datasets 
+Route planning providers manually integrate different geo-spatial datasets 
 before offering a Web service to developers, thus creating a closed world view. 
 In contrast, combining open datasets at runtime 
 can provide more information for user-specific route planning needs. 

@@ -23,17 +23,17 @@ that often publish them openly, thanks to strategic goals or legal mandates.
 Every route planner will somehow need to compile their own sources 
 over which they can execute their own route planning algorithm.
 
-In this paper, we aim to automate data adoption in route planners 
-and---as a first step---we introduce “Routable Tiles”. 
-Routable Tiles is a specification in which we republished all the roads in Open Street Map 
-using a tiling mechanism that exploits Open Data principles. 
-In the next section we will see that the ideas behind Routable Tiles itself is not novel, 
-yet to the best of our knwoledge, 
-publishing routable tiles for clients to consume has not been done before. 
+In this paper, we aim to automate data adoption in route planners.
+As a first step, we introduce *Routable Tiles*. 
+This is a hypermedia specification for geospatial road networks.
+In this specification, we republished all the roads in Open Street Map.
+In the next section we will see that the ideas behind Routable Tiles itself is not novel.
+The contribution of this paper lies in applying the geospatial indexing idea from the database world
+to Web APIs, introducing an ontology for describing geospatial hypermedia controls,
+and launching this world-wide dataset as a resource to the Semantic Web community.
 
-After introducing the ontology, specification and server software, 
+<!--After introducing the ontology, specification and server software, 
 we demonstrate what now becomes possible in an in-browser demo. 
-The browser itself can perform a routing algorithm on the client-side, 
-and every step in the routing algorithm can involve other weights and datasets as it pleases. 
-This first prototype exploiting Open Data principles probably introduces more questions than answers 
-as we discuss in the conclusion and discussion section.
+The browser itself can perform a routing algorithm, 
+and every step in the routing algorithm can thus involve other weights and datasets as it pleases.
+Finally, we discuss the open challenges that arose publishing the data for client-side adoption in the conclusion and discussion section.-->
