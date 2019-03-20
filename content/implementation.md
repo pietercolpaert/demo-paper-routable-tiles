@@ -8,6 +8,7 @@ The Linked Geo Data vocabulary has been unavailable since 2018 and not updated s
 Therefore we introduced our own vocabulary, that nonetheless takes a different approach.
 Instead of mapping everything, we decided to map only the bare minimum needed specifically for the use case or route planing.
 Therefore, we keep the ontology as close as possible to the actual OSM data model.
+We added links to the appropriate Linked Geo Data classes (ontology has yet to be published, awaiting a third party implementation).
 
 We define 3 main classes: *osm:Way*, *osm:Relation* and *osm:Node*.
 The *osm:members* property describes the members of the relation and the *osm:role* their function in the relation.
