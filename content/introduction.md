@@ -1,4 +1,4 @@
-<div class="printonly">This is a print-version of a paper first written for the Web. The Web-version is available at http://pieter.pm/demo-paper-routable-tiles/</div>
+<div class="printonly">Read the HTML-version: <a href="http://pieter.pm/demo-paper-routable-tiles/">http://pieter.pm/demo-paper-routable-tiles/</a></div>
 
 ## Introduction
 {:#introduction}
