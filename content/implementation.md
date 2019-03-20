@@ -12,7 +12,6 @@ Therefore, we keep the ontology as close as possible to the actual OSM data mode
 We define 3 main classes: *osm:Way*, *osm:Relation* and *osm:Node*.
 The *osm:members* property describes the members of the relation and the *osm:role* their function in the relation.
 *osm:restriction* is used to model turn restrictions.
-
 The property *osm:nodes* is used to link to an *rdf:List* of *osm:Node* items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
@@ -28,4 +27,4 @@ Finally, it also allows webpages on other domains to request its data by setting
 
 For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
-For example: [https://www.openstreetmap.org/node/366934331](https://www.openstreetmap.org/node/366934331) and [https://www.openstreetmap.org/way/242536619](https://www.openstreetmap.org/way/242536619).
+For example: [openstreetmap.org/node/366934331](https://www.openstreetmap.org/node/366934331) and [openstreetmap.org/way/242536619](https://www.openstreetmap.org/way/242536619).

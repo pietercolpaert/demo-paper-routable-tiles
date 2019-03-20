@@ -195,9 +195,8 @@ Therefore, we keep the ontology as close as possible to the actual OSM data mode
 
       <p>We define 3 main classes: <em>osm:Way</em>, <em>osm:Relation</em> and <em>osm:Node</em>.
 The <em>osm:members</em> property describes the members of the relation and the <em>osm:role</em> their function in the relation.
-<em>osm:restriction</em> is used to model turn restrictions.</p>
-
-      <p>The property <em>osm:nodes</em> is used to link to an <em>rdf:List</em> of <em>osm:Node</em> items.
+<em>osm:restriction</em> is used to model turn restrictions.
+The property <em>osm:nodes</em> is used to link to an <em>rdf:List</em> of <em>osm:Node</em> items.
 In one page, multiple lists can be described.
 If a Way crosses a tile, the other tile also mentioned the border Node in one of its rdf:Lists.
 The property <em>osm:members</em> is used to link to an <em>rdf:List</em> of <em>osm:Member</em> items.</p>
@@ -212,7 +211,7 @@ Finally, it also allows webpages on other domains to request its data by setting
 
       <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
 We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
-For example: <a href="https://www.openstreetmap.org/node/366934331">https:/​/​www.openstreetmap.org/node/366934331</a> and <a href="https://www.openstreetmap.org/way/242536619">https:/​/​www.openstreetmap.org/way/242536619</a>.</p>
+For example: <a href="https://www.openstreetmap.org/node/366934331">openstreetmap.org/node/366934331</a> and <a href="https://www.openstreetmap.org/way/242536619">openstreetmap.org/way/242536619</a>.</p>
 
     </section>
 
@@ -268,7 +267,7 @@ it still remains an open question if applying the Linked Data model
 to the roads related data is the optimal approach.
 For example, when another source wants to do a statement 
 about a part of a road that is not yet an osm:Way instance, 
-how will this data be interoperable with this dataset?. 
+how will this data be interoperable with this dataset? 
 On the other hand, having a semantic vocabulary to describe 
 not only roads but all the elements that belong to the OSM terminology 
 opens the door for other data publishers to link their own data to the 
@@ -280,6 +279,7 @@ Maybe there will be a need in the future for the Routable Tiles specification
 to support a binary format in order to reduce size. 
 In  general, still several optimizations can be done, 
 such as applying contraction hierarchies and exposing data on multiple zoom levels.</p>
+
     </section>
 
 </main>
