@@ -9,7 +9,7 @@ may provide more relevant information to the occasional cyclist.
 <!-- Need         -->
 A strategy for automating the adoption of open geo-spatial datasets is needed 
 to allow an ecosystem of route planners able to answer more specific and complex queries. 
-This rises new challenges such us 
+This raises new challenges such as 
 (i) how open geo-spatial datasets should be published on the Web to raise interoperability, 
 and (ii) how route planners can discover and integrate relevant data for a certain query on the fly.
 <!-- Task         --> 
