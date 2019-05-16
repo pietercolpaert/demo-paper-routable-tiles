@@ -28,9 +28,9 @@ The technology proposes a [tiling specification](https://github.com/valhalla/val
 Tiling the data makes sure the server can be selective about the data that needs to be loaded into memory in order to execute an individual request.
 This tiling specification in Valhalla is however not used as an exchange format – although offline routing is an upcoming feature – and interoperability with other datasets is not a focus.
 
-[Linked Geo Data](cite:cites SLHA11) is an initiative that maps Open Street Map data to Linked Data.
+[Linked Geo Data](cite:cites SLHA11) is an initiative that maps OpenStreetMap data to Linked Data.
 It releases data dumps, subject pages and a SPARQL endpoint.
-Furthermore, it has their own mappings from the Open Street Map data model to a Linked Geo Data ontology.
+Furthermore, it has their own mappings from the OpenStreetMap data model to a Linked Geo Data ontology.
 
 ### Open Data publishing
 

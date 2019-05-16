@@ -26,7 +26,7 @@ over which they can execute their own route planning algorithm.
 In this paper, we aim to automate data adoption in route planners.
 As a first step, we introduce *Routable Tiles*. 
 This is a hypermedia specification for geospatial road networks.
-In this specification, we republished all the roads in Open Street Map.
+In this specification, we republished all the roads in OpenStreetMap.
 In the next section we will see that the ideas behind Routable Tiles itself is not novel.
 The contribution of this paper lies in applying the geospatial indexing idea from the database world
 to Web APIs, introducing an ontology for describing geospatial hypermedia controls,

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Republishing Open Street Map’s roads as Linked Routable Tiles</title>
+  <title>Republishing OpenStreetMap’s roads as Linked Routable Tiles</title>
   <link rel="stylesheet" media="screen" href="styles/screen.css" />
   <link rel="stylesheet" media="print"  href="styles/print.css" />
   <style>
@@ -22,7 +22,7 @@
 </head>
 <body prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ dctypes: http://purl.org/dc/dcmitype/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: https://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: http://schema.org/ void: http://rdfs.org/ns/void# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ sioc: http://rdfs.org/sioc/ns# doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# as: https://www.w3.org/ns/activitystreams# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# as: https://www.w3.org/ns/activitystreams# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp#" typeof="schema:CreativeWork sioc:Post prov:Entity">
   <header>
-  <h1 id="republishing-open-street-maps-roads-as-linked-routable-tiles">Republishing Open Street Map’s roads as Linked Routable Tiles</h1>
+  <h1 id="republishing-openstreetmaps-roads-as-linked-routable-tiles">Republishing OpenStreetMap’s roads as Linked Routable Tiles</h1>
 
   <ul id="authors">
     <li><a href="https://pietercolpaert.be" typeof="http://xmlns.com/foaf/0.1/Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
@@ -72,13 +72,13 @@ This raises new challenges such as
 (i) how open geo-spatial datasets should be published on the Web to raise interoperability, 
 and (ii) how route planners can discover and integrate relevant data for a certain query on the fly.
 <!-- Task         --> 
-We republished Open Street Map’s road network as “Routable Tiles”
+We republished OpenStreetMap’s road network as “Routable Tiles”
 to facilitate its integration into open route planners.
 To achieve this, we use a Linked Data strategy and follow an approach similar to vector tiles.
 <!-- Object       -->
 In a demo, we show how client-side code can automatically discover tiles and perform a shortest path algorithm.
 <!-- Findings     -->
-We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the Open Street Map ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
+We provide four contributions: (i) we launched an open geo-spatial dataset that is available for everyone to reuse at no cost, (ii) we published a Linked Data version of the OpenStreetMap ontology, (iii) we introduced a hypermedia specification for vector tiles that extends the Hydra ontology, and (iv) we released the mapping scripts, demo and routing scripts as open source software.
 <!-- Conclusion and Perspectives -->
 <!-- The preliminary conclusions of this work put forward more questions than answers: 
 are existing RDF serializations compact enough for an acceptable user experience? 
@@ -118,7 +118,7 @@ over which they can execute their own route planning algorithm.</p>
       <p>In this paper, we aim to automate data adoption in route planners.
 As a first step, we introduce <em>Routable Tiles</em>. 
 This is a hypermedia specification for geospatial road networks.
-In this specification, we republished all the roads in Open Street Map.
+In this specification, we republished all the roads in OpenStreetMap.
 In the next section we will see that the ideas behind Routable Tiles itself is not novel.
 The contribution of this paper lies in applying the geospatial indexing idea from the database world
 to Web APIs, introducing an ontology for describing geospatial hypermedia controls,
@@ -162,9 +162,9 @@ The technology proposes a <a href="https://github.com/valhalla/valhalla/blob/mas
 Tiling the data makes sure the server can be selective about the data that needs to be loaded into memory in order to execute an individual request.
 This tiling specification in Valhalla is however not used as an exchange format – although offline routing is an upcoming feature – and interoperability with other datasets is not a focus.</p>
 
-      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="http://jens-lehmann.org/files/2012/linkedgeodata2.pdf">Linked Geo Data</a> <span class="references">[<a href="#ref-2">2</a>]</span> is an initiative that maps Open Street Map data to Linked Data.
+      <p><a property="schema:citation http://purl.org/spar/cito/cites" href="http://jens-lehmann.org/files/2012/linkedgeodata2.pdf">Linked Geo Data</a> <span class="references">[<a href="#ref-2">2</a>]</span> is an initiative that maps OpenStreetMap data to Linked Data.
 It releases data dumps, subject pages and a SPARQL endpoint.
-Furthermore, it has their own mappings from the Open Street Map data model to a Linked Geo Data ontology.</p>
+Furthermore, it has their own mappings from the OpenStreetMap data model to a Linked Geo Data ontology.</p>
 
       <h3 id="open-data-publishing">Open Data publishing</h3>
 
@@ -186,7 +186,7 @@ Links in the responses ensure a client can always find more information to take 
       <h2>Implementation</h2>
 
       <p>Routable Tiles is a JSON-LD specification for which the working draft can be found at <a href="https://openplanner.team/specs/2018-11-routable-tiles.html">https:/​/​openplanner.team/specs/2018-11-routable-tiles.html</a>.
-It has three main aspects: (i) it introduces a <em>hypermedia specification</em> reusing Hydra Collections for describing a tile server, (ii) a way to describe <em>Open Street Map’s nodes, ways and relations</em>; and (iii) it introduces a mapping of the Open Street Map basic terms to an RDFS vocabulary.</p>
+It has three main aspects: (i) it introduces a <em>hypermedia specification</em> reusing Hydra Collections for describing a tile server, (ii) a way to describe <em>OpenStreetMap’s nodes, ways and relations</em>; and (iii) it introduces a mapping of the OpenStreetMap basic terms to an RDFS vocabulary.</p>
 
       <p>The Linked Geo Data vocabulary has been unavailable since 2018 and not updated since 2015.
 Therefore we introduced our own vocabulary, that nonetheless takes a different approach.
@@ -203,15 +203,15 @@ If a Way crosses a tile, the other tile also mentioned the border Node in one of
 The property <em>osm:members</em> is used to link to an <em>rdf:List</em> of <em>osm:Member</em> items.</p>
 
       <p>The mapping scripts and server interface can be found at <a href="https://github.com/openplannerteam/routeable-tiles">https:/​/​github.com/openplannerteam/routeable-tiles</a>.
-Every tile in Open Street Map on zoom level 14 is on the fly made available as JSON-LD.
+Every tile in OpenStreetMap on zoom level 14 is on the fly made available as JSON-LD.
 Special attention was given to the HTTP server to include a server-side cache and to compress the HTTP response with gzip.
 Furthermore, it sets both an etag header and a cache-control max-age header for client-side cache control.
 Finally, it also allows webpages on other domains to request its data by setting the appropriate Cross Origin Resource Sharing headers.</p>
 
       <!--Due to [a recent change in the WhatWG fetch specification](https://github.com/whatwg/fetch/issues/862), there is also a need for supporting the OPTIONS method, that specifically allows all headers in its response.-->
 
-      <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the Open Street Map project itself.
-We hope that at some point, Open Street Map decides to support a Linked Data representation on these URIs.
+      <p>For the URIs of Ways and Nodes, we decided to reuse the subject pages provided by the OpenStreetMap project itself.
+We hope that at some point, OpenStreetMap decides to support a Linked Data representation on these URIs.
 For example: <a href="https://www.openstreetmap.org/node/366934331">openstreetmap.org/node/366934331</a> and <a href="https://www.openstreetmap.org/way/242536619">openstreetmap.org/way/242536619</a>.</p>
 
     </section>
